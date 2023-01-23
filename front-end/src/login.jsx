@@ -8,32 +8,17 @@ export function Login({ hasError }) {
 
   return (
     <section>
-      {hasError && <p>An error has occurred. Please try again.TESTING</p>}
       {useSearchParams.register == "true" && (
         <p>You have successfully registered! Please login.</p>
       )}
-      {/* <h2 id="login-h2">LOG IN</h2>
 
-      <div id="form">
-        <Form method="post">
-          <div>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" />
-          </div>
-          <div>
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" />
-          </div>
-          <input id="login" type="submit" value="Log In" />
-        </Form>
-      </div> */}
       {/* ADD CSS */}
       <>
         <h1 id="login-msg">Welcome to iSHOWMO</h1>
-        <div class="vh-100 d-flex justify-content-center align-items-center">
+        <div class=" d-flex justify-content-center align-items-center">
           <div class="col-md-4 p-5 shadow-sm border rounded-5 border-primary">
             <h2 class="text-center mb-4 text-primary">Login </h2>
-            <form method="post">
+            <Form method="post">
               <div class="mb-3">
                 <label for="username" class="form-label">
                   Username
@@ -67,14 +52,19 @@ export function Login({ hasError }) {
                   Login
                 </button>
               </div>
-            </form>
+            </Form>
             <div class="mt-3">
               <p class="mb-0  text-center">
                 Don't have an account?{" "}
-                <a href="signup.html" class="text-primary fw-bold">
+                <a href="./sign-up" class="text-primary fw-bold">
                   Sign Up
                 </a>
               </p>
+              {hasError && (
+                <div class="alert alert-danger" role="alert">
+                  An error has occurred. Please try again.TESTING
+                </div>
+              )}
             </div>
           </div>
         </div>
