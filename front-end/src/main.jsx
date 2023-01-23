@@ -14,11 +14,23 @@ import { Login } from "./login";
 import { SignUp } from "./sign-up";
 // -------->
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ForgotPassword } from "./pages/ForgotPassword";
 // Add CSS
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<App />}>
+      <Route
+        path="forgot-password"
+        element={<ForgotPassword />}
+        action={async ({ request }) => {
+          try {
+          } catch (err) {
+            console.log(err);
+            throw err;
+          }
+        }}
+      />
       <Route
         path="sign-up"
         element={<SignUp />}

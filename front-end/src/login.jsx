@@ -43,7 +43,7 @@ export function Login({ hasError }) {
                 />
               </div>
               <p class="small">
-                <a class="text-primary" href="forget-password.html">
+                <a class="text-primary" href="forgot-password">
                   Forgot password?
                 </a>
               </p>
