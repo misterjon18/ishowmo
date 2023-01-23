@@ -1,0 +1,10 @@
+/* Import all of Bootstrap's CSS */
+
+// @import "~bootstrap/scss/bootstrap";
+.main {
+  background-color: yellow;
+  .box1 {
+    color: blue;
+    background-color: green;
+  }
+}
