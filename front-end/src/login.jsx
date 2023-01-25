@@ -62,7 +62,7 @@ export function Login({ hasError }) {
               </p>
               {hasError && (
                 <div class="alert alert-danger" role="alert">
-                  An error has occurred. Please try again.TESTING
+                  An error has occurred. Please try again.
                 </div>
               )}
             </div>

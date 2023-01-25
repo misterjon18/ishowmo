@@ -1,9 +1,16 @@
 #login-msg {
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 50px;
   color: rgb(18, 18, 202);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   border-radius: 10px;
   border: 2px solid blue;
   background-color: pink;
+}
+
+/* Forgot Password  */
+.container-forgot {
+  width: 50%;
+  margin: 100px auto 0 auto;
 }

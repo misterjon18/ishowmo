@@ -1,16 +1,78 @@
 import express from "express";
 const router = express.Router();
-
 import { connectDatabase } from "../pool.js";
 import bcrypt from "bcryptjs";
 import { generateJwt } from "../jwt/jwtGenerator.js";
 import { auth } from "../middleware/auth.js";
 import multer from "multer";
 const upload = multer({ dest: "uploads/" });
-
 const pool = connectDatabase();
+import crypto from "crypto";
+import nodemailer from "nodemailer";
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false,
+  auth: {
+    user: process.env.EMAIL_USERNAME,
+    pass: process.env.EMAIL_PASSWORD,
+  },
+});
 
-// routes will automatically begin with /user so remove it
+router.post("/send-email", async (req, res) => {
+  try {
+    // Check if email is existing
+    const { email } = req.body;
+    const result = await pool.query(
+      `SELECT email FROM collector WHERE email = $1`,
+      [email]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).send({ message: "email not found" });
+    }
+    //generate random password
+    const newPassword = crypto
+      .randomBytes(Math.ceil(10 / 2))
+      .toString("hex")
+      .slice(0, 10);
+
+    console.log(newPassword);
+    // Converting password to bcrypt
+
+    const saltRound = 10;
+    const salt = await bcrypt.genSalt(saltRound);
+
+    const bcryptPassword = await bcrypt.hash(newPassword, salt);
+
+    const user = await pool.query(
+      `
+          UPDATE collector set
+    password = $1
+    WHERE email =$2 RETURNING *`,
+      [bcryptPassword, email]
+    );
+
+    transporter.sendMail(
+      {
+        from: "anthonydeleon135@gmail.com",
+        to: email,
+        subject: "Resetting your Password",
+        text: "Your new password is  " + newPassword,
+      },
+      (error, info) => {
+        if (error) {
+          console.log(error);
+        } else {
+          console.log("Email sent: " + info.response);
+          res.status(200).send({ message: "password reset email sent" });
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
+});
 router.get("/userlist", async (req, res) => {
   try {
     const users = await pool.query("SELECT * FROM collector");
