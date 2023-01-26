@@ -92,17 +92,7 @@ export function SignUp({ hasError }) {
           </div>
 
           {/* ---- */}
-          <div class="col-md-9 pe-5">
-            <input
-              class="form-control form-control-lg"
-              id="formFileLg"
-              type="file"
-            />
 
-            <div class="small text-muted mt-2">
-              Upload your image file . Max file size 50 MB
-            </div>
-          </div>
           {/* Personal Info */}
           <header>HEADER</header>
           <div class="row">

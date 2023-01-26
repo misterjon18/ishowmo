@@ -24,12 +24,17 @@ const router = createBrowserRouter(
         path="forgot-password"
         element={<ForgotPassword />}
         action={async ({ request }) => {
+          const data = Object.fromEntries(await request.formData());
           try {
+            const result = await app.post("/send-email", data);
+
+            return result.data;
           } catch (err) {
             console.log(err);
-            throw err;
+            throw err.response.data;
           }
         }}
+        errorElement={<ForgotPassword />}
       />
       <Route
         path="sign-up"

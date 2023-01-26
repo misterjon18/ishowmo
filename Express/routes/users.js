@@ -145,7 +145,7 @@ router.post("/register", upload.single("picture"), async (req, res) => {
         street,
         city,
         province,
-        zip,
+        zip === "" ? null : zip,
         phone,
         birth_date,
         sex,
@@ -160,6 +160,7 @@ router.post("/register", upload.single("picture"), async (req, res) => {
 
     res.json({
       token,
+      user: { username, email },
     });
   } catch (error) {
     console.log(error.message);
