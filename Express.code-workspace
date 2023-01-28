@@ -1,11 +1,13 @@
 {
   "folders": [
-	{
-		"path": "Express"
-	},
-	{
-		"path": "front-end"
-	}
-],
+    {
+      "name": "Express",
+      "path": "Express"
+    },
+    {
+      "name": "front-end",
+      "path": "front-end"
+    }
+  ],
   "settings": {}
 }

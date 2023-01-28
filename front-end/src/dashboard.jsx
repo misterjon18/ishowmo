@@ -1,16 +1,25 @@
 import { useEffect } from "react";
+import Sidebar from "./components/Sidebar";
+// ------------EDIT
+import "./styles/Sidebar.css";
 
 const Dashboard = () => {
   useEffect(() => {
     return () => {
-      sessionStorage.removeItem("welcome");
+      if (sessionStorage.getItem("welcome") == "true") {
+        alert("Successfully login");
+        sessionStorage.setItem("welcome", "false");
+      }
+      // sessionStorage.removeItem("welcome");
     };
   }, []);
   return (
     <>
-      {sessionStorage.getItem("welcome")}
+      {/* {sessionStorage.getItem("welcome")} */}
 
-      <div>Welcome to My Dashboard</div>
+      <Sidebar />
+
+      <div className="App"></div>
     </>
   );
 };

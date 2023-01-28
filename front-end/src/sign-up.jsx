@@ -1,7 +1,7 @@
 import { Form } from "react-router-dom";
 // import ImageUpload from "./components/ImageUpload";
 
-import "./styles/sign-up.css";
+import "./styles/Sign-up.css";
 import { useRef } from "react";
 
 export function SignUp({ hasError }) {
@@ -94,7 +94,7 @@ export function SignUp({ hasError }) {
           {/* ---- */}
 
           {/* Personal Info */}
-          <header>HEADER</header>
+
           <div class="row">
             <div class="col-md-6 mt-md-0 mt-3">
               <label>Street</label>

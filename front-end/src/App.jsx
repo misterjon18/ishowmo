@@ -8,10 +8,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* Put navigation bar here */}
-
-      {/* TESTING !! */}
-
       <Outlet></Outlet>
       {/* Outlet is for rendering children inside Route */}
     </div>

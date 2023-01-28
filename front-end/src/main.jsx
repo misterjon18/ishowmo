@@ -64,7 +64,8 @@ const router = createBrowserRouter(
             const res = await app.post("/login", data);
 
             localStorage.setItem("token", res.data.token);
-            sessionStorage.setItem("welcome", "Successfully login");
+            sessionStorage.setItem("welcome", "true");
+
             return redirect("/dashboard");
           } catch (err) {
             console.log(err);
