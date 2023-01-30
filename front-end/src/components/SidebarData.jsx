@@ -3,7 +3,6 @@ import CollectionsIcon from "@mui/icons-material/Collections";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import LogoutIcon from "@mui/icons-material/Logout";
 
 export const SidebarData = [
   {

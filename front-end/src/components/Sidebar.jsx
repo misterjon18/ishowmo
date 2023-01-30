@@ -18,44 +18,43 @@ function Sidebar() {
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
-        {SidebarData.map((val, key) => {
-          console.log(key);
-          return (
-            <li
-              key={key}
-              className="row"
-              id={window.location.pathname == val.link ? "active" : ""}
-              onClick={() => {
-                window.location.pathname = val.link;
-              }}
-            >
-              {" "}
-              <div>
-                {val.icon}
-                {val.title}
-              </div>
-              {/* <div>{val.title}</div> */}
-            </li>
-          );
-        })}
+        <div className="Sidebar-main">
+          {SidebarData.map((val, key) => {
+            console.log(key);
+            return (
+              <li
+                key={key}
+                className="row"
+                id={window.location.pathname == val.link ? "active" : ""}
+                onClick={() => {
+                  window.location.pathname = val.link;
+                }}
+              >
+                {" "}
+                <div>
+                  <div className="val-icon">{val.icon}</div>
+                  <div className="val-title">{val.title}</div>
+                </div>
+              </li>
+            );
+          })}{" "}
+        </div>
         {/* -----EDITABLE */}
+
         <li
           key={5}
-          className="row"
+          className="row Log-Out"
           id={window.location.pathname == "/logout" ? "active" : ""}
           onClick={handleLogout}
         >
           {" "}
           <div>
-            <LogoutIcon />
-            <span style={{ paddingLeft: 20 }}>LogOut</span>
+            <div className="val-icon">
+              <LogoutIcon />
+            </div>
+            <div className="val-title">LogOut</div>
           </div>
-          {/* <div>{val.title}</div> */}
         </li>
-
-        {/* ========== */}
-
-        {/* ========== */}
       </ul>
     </div>
   );

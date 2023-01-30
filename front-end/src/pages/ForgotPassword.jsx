@@ -47,10 +47,4 @@ export function ForgotPassword() {
       </div>
     </Form>
   );
-
-  // Form
-  //   - Input field na for email
-  // - Button "Reset Password"
-
-  //
 }

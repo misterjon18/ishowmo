@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import app from "../lib/axios-config";
 import Dashboard from "./dashboard";
+
 import {
   Route,
   RouterProvider,
@@ -12,9 +13,11 @@ import {
 } from "react-router-dom";
 import { Login } from "./login";
 import { SignUp } from "./sign-up";
+
 // -------->
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";
+import { UserList } from "./components/UserList";
 // Add CSS
 
 const router = createBrowserRouter(
@@ -52,6 +55,21 @@ const router = createBrowserRouter(
         }}
         errorElement={<SignUp hasError />}
       />
+      <Route
+        path="users"
+        element={<UserList />}
+        loader={async () => {
+          try {
+            const result = await app.get("/userlist");
+            console.log(result);
+            console.log(result.data);
+            return result.data;
+          } catch (err) {
+            console.log(err);
+            throw err;
+          }
+        }}
+      ></Route>
       {/* Homepage */}
       {/* <Route index element={<App />}></Route> */}
       <Route
