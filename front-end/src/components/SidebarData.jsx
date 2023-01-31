@@ -2,21 +2,19 @@ import HomeIcon from "@mui/icons-material/Home";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import ReviewsIcon from "@mui/icons-material/Reviews";
-import DashboardIcon from "@mui/icons-material/Dashboard";
+// import DashboardIcon from "@mui/icons-material/Dashboard";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 export const SidebarData = [
   {
     title: "Home",
     icon: <HomeIcon />,
-    link: "/home",
-  },
-  {
-    title: "Dashboard",
-    icon: <DashboardIcon />,
     link: "/dashboard",
   },
+  { title: "Profile", icon: <AccountCircleIcon />, link: "/profile" },
+
   {
-    title: "Collection",
+    title: "My Collection",
     icon: <CollectionsIcon />,
     link: "/collection",
   },
@@ -26,7 +24,7 @@ export const SidebarData = [
     link: "/reviews",
   },
   {
-    title: "Users",
+    title: "Collectors",
     icon: <PeopleAltIcon />,
     link: "/users",
   },

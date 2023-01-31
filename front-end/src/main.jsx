@@ -18,6 +18,7 @@ import { SignUp } from "./sign-up";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { UserList } from "./components/UserList";
+import { UserProfile } from "./components/UserProfile";
 // Add CSS
 
 const router = createBrowserRouter(
@@ -70,6 +71,29 @@ const router = createBrowserRouter(
           }
         }}
       ></Route>
+      <Route
+        path="profile"
+        element={<UserProfile />}
+        loader={async () => {
+          try {
+            const result = await app.get(
+              "/" + localStorage.getItem("collector_id"),
+              // Pass the token and headers----------------
+              {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              }
+            );
+
+            console.log(result.data);
+            return result.data;
+          } catch (err) {
+            console.log(err);
+            throw err;
+          }
+        }}
+      ></Route>
       {/* Homepage */}
       {/* <Route index element={<App />}></Route> */}
       <Route
@@ -80,8 +104,9 @@ const router = createBrowserRouter(
           try {
             // needs validation need to check if login is successful
             const res = await app.post("/login", data);
-
             localStorage.setItem("token", res.data.token);
+            // EDIT
+            localStorage.setItem("collector_id", res.data.id);
             sessionStorage.setItem("welcome", "true");
 
             return redirect("/dashboard");
