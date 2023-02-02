@@ -33,12 +33,13 @@ pool.connect((err) => {
 import router from "./routes/users.js";
 import collectionRouter from "./routes/collection.js";
 import commentRouter from "./routes/comment.js";
-import reviewRouter from "./routes/review.js";
 
-app.use("/", reviewRouter);
+import postsRouter from "./routes/posts.js";
+
 app.use("/", router);
 app.use("/", collectionRouter);
 app.use("/", commentRouter);
+app.use("/", postsRouter);
 
 app.get("/contact", async (req, res) => {
   try {

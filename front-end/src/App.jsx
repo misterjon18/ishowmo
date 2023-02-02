@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { Outlet } from "react-router-dom";
 import Dashboard from "./dashboard";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const [count, setCount] = useState(0);

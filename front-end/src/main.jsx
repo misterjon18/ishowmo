@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import app from "../lib/axios-config";
 import Dashboard from "./dashboard";
-
+import { Layout } from "./components/Layout";
 import {
   Route,
   RouterProvider,
@@ -19,11 +19,53 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { UserList } from "./components/UserList";
 import { UserProfile } from "./components/UserProfile";
+
 // Add CSS
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<App />}>
+      <Route element={<Layout />}>
+        <Route
+          path="users"
+          element={<UserList />}
+          loader={async () => {
+            try {
+              const result = await app.get("/userlist");
+              console.log(result);
+              console.log(result.data);
+              return result.data;
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+        ></Route>
+        <Route
+          path="profile"
+          element={<UserProfile />}
+          loader={async () => {
+            try {
+              const result = await app.get(
+                "/" + localStorage.getItem("collector_id"),
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+
+              console.log(result.data);
+              return result.data[0];
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+        ></Route>
+        <Route path="dashboard" element={<Dashboard />} />
+      </Route>
       <Route
         path="forgot-password"
         element={<ForgotPassword />}
@@ -56,44 +98,7 @@ const router = createBrowserRouter(
         }}
         errorElement={<SignUp hasError />}
       />
-      <Route
-        path="users"
-        element={<UserList />}
-        loader={async () => {
-          try {
-            const result = await app.get("/userlist");
-            console.log(result);
-            console.log(result.data);
-            return result.data;
-          } catch (err) {
-            console.log(err);
-            throw err;
-          }
-        }}
-      ></Route>
-      <Route
-        path="profile"
-        element={<UserProfile />}
-        loader={async () => {
-          try {
-            const result = await app.get(
-              "/" + localStorage.getItem("collector_id"),
-              // Pass the token and headers----------------
-              {
-                headers: {
-                  Authorization: `Bearer ${localStorage.getItem("token")}`,
-                },
-              }
-            );
 
-            console.log(result.data);
-            return result.data;
-          } catch (err) {
-            console.log(err);
-            throw err;
-          }
-        }}
-      ></Route>
       {/* Homepage */}
       {/* <Route index element={<App />}></Route> */}
       <Route
@@ -104,7 +109,13 @@ const router = createBrowserRouter(
           try {
             // needs validation need to check if login is successful
             const res = await app.post("/login", data);
+
+            // EDITABLE
+            app.defaults.headers.common[
+              "Authorization"
+            ] = `Bearer ${res.data.token}`;
             localStorage.setItem("token", res.data.token);
+
             // EDIT
             localStorage.setItem("collector_id", res.data.id);
             sessionStorage.setItem("welcome", "true");
@@ -118,7 +129,6 @@ const router = createBrowserRouter(
         errorElement={<Login hasError />}
       />
     </Route>,
-    <Route path="dashboard" element={<Dashboard />} />,
   ])
 );
 

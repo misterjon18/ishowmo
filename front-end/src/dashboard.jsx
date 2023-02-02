@@ -17,8 +17,6 @@ const Dashboard = () => {
     <>
       {/* {sessionStorage.getItem("welcome")} */}
 
-      <Sidebar />
-
       <div className="App"></div>
     </>
   );
