@@ -13,7 +13,6 @@ postsRouter.get("/posts", auth, async (req, res) => {
   try {
     console.log("POSTS WORKING!!!");
     const posts = await pool.query("SELECT * FROM posts");
-
     res.status(200).json(posts.rows);
   } catch (error) {
     console.error(error);

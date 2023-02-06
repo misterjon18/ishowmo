@@ -29,13 +29,13 @@ pool.connect((err) => {
     });
   }
 });
-
+import postLikesRouter from "./routes/postLikes.js";
 import router from "./routes/users.js";
 import collectionRouter from "./routes/collection.js";
 import commentRouter from "./routes/comment.js";
 
 import postsRouter from "./routes/posts.js";
-
+app.use("/", postLikesRouter);
 app.use("/", router);
 app.use("/", collectionRouter);
 app.use("/", commentRouter);
