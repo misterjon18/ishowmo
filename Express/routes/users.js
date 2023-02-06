@@ -214,7 +214,7 @@ router.get("/verify", auth, async (req, res) => {
 
 // Cleaner syntax for routes
 router
-  .route("/:id") // localhost:8000/user/1
+  .route("/user/:id") // localhost:8000/user/1
   .get(auth, async (req, res) => {
     try {
       const id = req.params.id;

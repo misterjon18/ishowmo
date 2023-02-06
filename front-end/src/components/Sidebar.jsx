@@ -18,7 +18,7 @@ function Sidebar() {
   return (
     <div className="Sidebar">
       <ul className="SidebarList">
-        <div className="Sidebar-main">
+        <div style={{ height: "calc(100vh - 50px)" }} className="Sidebar-main">
           {SidebarData.map((val, key) => {
             console.log(key);
             return (

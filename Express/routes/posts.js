@@ -8,13 +8,29 @@ const nanoid = customAlphabet("1234567890abcdef", 5);
 
 const pool = connectDatabase();
 
+// NOT WORKING ---------SEE ALL LATEST POSTS
 postsRouter.get("/postslist", auth, async (req, res) => {
   try {
-    console.log("POSTS IS WORKING !!!");
-    const userId = req.user.id;
+    console.log("POSTS WORKING!!!");
+    const posts = await pool.query("SELECT * FROM posts");
+
+    res.status(200).json(posts.rows);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error fetching posts" });
+  }
+});
+// // ------SEE OWN POSTS --- WORKING
+postsRouter.get("/me/postslist", auth, async (req, res) => {
+  try {
+    const { collector_id } = req.collector;
+    // const { id } = req.body;
+
+    console.log(collector_id); // 6
+    console.log("WORKING !!!!!");
     const posts = await pool.query(
-      "SELECT * FROM public.posts WHERE user_id = $1",
-      [userId]
+      "SELECT * FROM public.posts WHERE collector_id = $1",
+      [collector_id]
     );
     res.status(200).json({ posts: posts.rows });
   } catch (error) {
@@ -22,7 +38,27 @@ postsRouter.get("/postslist", auth, async (req, res) => {
     res.status(500).json({ error: "Error fetching posts" });
   }
 });
+
+//  WORKING ------SEE SPECIC POSTS ID
+postsRouter.get("/posts/:postId", auth, async (req, res) => {
+  try {
+    const { collector_id } = req.collector;
+    const post_id = req.params.postId;
+    console.log(post_id);
+    console.log("WORKING !!!!!");
+    const posts = await pool.query(
+      "SELECT * FROM public.posts WHERE post_id = $1",
+      [post_id]
+    );
+    res.status(200).json({ posts: posts.rows });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error fetching posts" });
+  }
+});
+
 //Routes
+// WORKING ---- POSTS IN POSTS TABLE
 postsRouter.post("/posts", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
@@ -67,32 +103,20 @@ postsRouter.post("/posts", auth, async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-postsRouter.put("/posts", auth, async (req, res) => {
-  try {
-    const { star_rating, id } = req.body;
-    const newreview = await pool.query(
-      `
-    UPDATE posts set star_rating =$1 
-    WHERE id =$2 RETURNING *`,
-      [star_rating, id]
-    );
-    res.json(newPosts.rows);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send(error.message);
-  }
-});
-postsRouter.delete("/review", auth, async (req, res) => {
+//  WORKING---- DELETE POST OF OWNER
+postsRouter.delete("/me/posts/:postID", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    const { id } = req.body;
+    const post_id = req.params.postID;
+    console.log(post_id);
+    console.log(collector_id);
     const newPosts = await pool.query(
       `
   DELETE FROM posts 
-  WHERE account_id =$1 AND id = $2 RETURNING *`,
-      [collector_id, id]
+  WHERE post_id =$1 AND collector_id = $2 `,
+      [post_id, collector_id]
     );
-    res.send(`posts with id :${id} succesfully deleted!`);
+    res.send(`posts with id :${post_id} succesfully deleted!`);
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);
