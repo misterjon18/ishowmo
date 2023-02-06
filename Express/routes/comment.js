@@ -6,7 +6,7 @@ const pool = connectDatabase();
 
 commentRouter.get("/comment", auth, async (req, res) => {
   try {
-    const users = await pool.query("SELECT * FROM public.comment");
+    const users = await pool.query("SELECT * FROM public.comments");
     res.json(users.rows);
   } catch (error) {
     console.log(error);
@@ -16,7 +16,7 @@ commentRouter.get("/comment", auth, async (req, res) => {
 //Routes
 commentRouter.post("/comment", auth, async (req, res) => {
   try {
-    const { collector_id: account_id } = req.collector;
+    const { collector_id } = req.collector;
     const { comment, collection_id } = req.body;
 
     // front-end has access to account id of the collection

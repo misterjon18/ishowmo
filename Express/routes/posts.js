@@ -8,8 +8,8 @@ const nanoid = customAlphabet("1234567890abcdef", 5);
 
 const pool = connectDatabase();
 
-// NOT WORKING ---------SEE ALL LATEST POSTS
-postsRouter.get("/postslist", auth, async (req, res) => {
+// WORKING ---------SEE ALL LATEST POSTS
+postsRouter.get("/posts", auth, async (req, res) => {
   try {
     console.log("POSTS WORKING!!!");
     const posts = await pool.query("SELECT * FROM posts");
@@ -21,11 +21,9 @@ postsRouter.get("/postslist", auth, async (req, res) => {
   }
 });
 // // ------SEE OWN POSTS --- WORKING
-postsRouter.get("/me/postslist", auth, async (req, res) => {
+postsRouter.get("/me/posts", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    // const { id } = req.body;
-
     console.log(collector_id); // 6
     console.log("WORKING !!!!!");
     const posts = await pool.query(
@@ -39,16 +37,16 @@ postsRouter.get("/me/postslist", auth, async (req, res) => {
   }
 });
 
-//  WORKING ------SEE SPECIC POSTS ID
+//  WORKING ------SEE SPECIFIC POSTS ID
 postsRouter.get("/posts/:postId", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    const post_id = req.params.postId;
-    console.log(post_id);
+    const postId = req.params.postId;
+
     console.log("WORKING !!!!!");
     const posts = await pool.query(
       "SELECT * FROM public.posts WHERE post_id = $1",
-      [post_id]
+      [postId]
     );
     res.status(200).json({ posts: posts.rows });
   } catch (error) {
@@ -104,19 +102,17 @@ postsRouter.post("/posts", auth, async (req, res) => {
   }
 });
 //  WORKING---- DELETE POST OF OWNER
-postsRouter.delete("/me/posts/:postID", auth, async (req, res) => {
+postsRouter.delete("/me/posts/:postId", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    const post_id = req.params.postID;
-    console.log(post_id);
-    console.log(collector_id);
+    const postId = req.params.postId;
     const newPosts = await pool.query(
       `
-  DELETE FROM posts 
-  WHERE post_id =$1 AND collector_id = $2 `,
-      [post_id, collector_id]
+      DELETE FROM posts 
+      WHERE post_id =$1 AND collector_id = $2 `,
+      [postId, collector_id]
     );
-    res.send(`posts with id :${post_id} succesfully deleted!`);
+    res.send(`posts with id :${postId} succesfully deleted!`);
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);
