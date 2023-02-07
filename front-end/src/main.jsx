@@ -47,7 +47,7 @@ const router = createBrowserRouter(
           loader={async () => {
             try {
               const result = await app.get(
-                "/" + localStorage.getItem("collector_id"),
+                "/user/" + localStorage.getItem("collector_id"),
                 // Pass the token and headers----------------
                 {
                   headers: {
@@ -63,6 +63,7 @@ const router = createBrowserRouter(
               throw err;
             }
           }}
+          errorElement={<UserProfile />}
         ></Route>
         <Route path="dashboard" element={<Dashboard />} />
       </Route>

@@ -222,6 +222,7 @@ router
         `SELECT * FROM public.collector WHERE collector_id=$1`,
         [id]
       );
+      console.log(`   OH NO IT IS NOT WORKING !!!  `);
       if (users.rows.length === 0) {
         return res.status(401).send("Cannot get that user data");
       } else {
@@ -231,9 +232,6 @@ router
       console.log(error.message);
       res.status(500).send(error.message);
     }
-    // Reading id from the URL
-
-    // res.send(`Get User With ID ${id}`);
   })
   .put(auth, async (req, res) => {
     try {

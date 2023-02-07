@@ -3,7 +3,7 @@ const postsRouter = express.Router();
 import { connectDatabase } from "../pool.js";
 import { auth } from "../middleware/auth.js";
 import path from "path";
-import { customAlphabet } from "nanoid";
+import { customAlphabet } from "nanoid"; //for generating random characters for files with same name
 const nanoid = customAlphabet("1234567890abcdef", 5);
 
 const pool = connectDatabase();

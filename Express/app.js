@@ -1,10 +1,16 @@
+// Modules --------
 import { connectDatabase } from "./pool.js";
 import bodyParser from "body-parser";
 import express from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload";
 import fs from "fs/promises";
-
+// APIs-----------
+import postLikesRouter from "./routes/postLikes.js";
+import router from "./routes/users.js";
+import collectionRouter from "./routes/collection.js";
+import commentsRouter from "./routes/comments.js";
+import postsRouter from "./routes/posts.js";
 const pool = connectDatabase();
 const app = express();
 const PORT = 8000;
@@ -29,16 +35,10 @@ pool.connect((err) => {
     });
   }
 });
-import postLikesRouter from "./routes/postLikes.js";
-import router from "./routes/users.js";
-import collectionRouter from "./routes/collection.js";
-import commentRouter from "./routes/comment.js";
-
-import postsRouter from "./routes/posts.js";
 app.use("/", postLikesRouter);
 app.use("/", router);
 app.use("/", collectionRouter);
-app.use("/", commentRouter);
+app.use("/", commentsRouter);
 app.use("/", postsRouter);
 
 app.get("/contact", async (req, res) => {

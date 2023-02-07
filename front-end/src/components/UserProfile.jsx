@@ -1,8 +1,16 @@
-import { useLoaderData, Form } from "react-router-dom";
+import {
+  useLoaderData,
+  useActionData,
+  useRouteError,
+  Form,
+} from "react-router-dom";
 
 export const UserProfile = () => {
   const profile = useLoaderData();
-  console.log(profile);
+  // let actionData = useActionData();
+  let error = useRouteError();
+  console.log(error);
+
   return (
     <div className="container-xl px-4 mt-4">
       <div className="col-xl-8">
