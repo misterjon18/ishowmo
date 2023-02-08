@@ -9,7 +9,7 @@ commentsRouter.get("/posts/:postId/comments", auth, async (req, res) => {
   try {
     const postId = req.params.postId;
     const users = await pool.query(
-      "SELECT comment FROM public.comments WHERE post_id = $1",
+      "SELECT comment FROM public.comments WHERE post_id = $1 ORDER BY created_at",
       [postId]
     );
     res.json(users.rows);
@@ -27,69 +27,60 @@ commentsRouter.post("/posts/:postId/comments", auth, async (req, res) => {
     const { comment } = req.body;
     const newComment = await pool.query(
       `
-      INSERT INTO comments (comment,
+      INSERT INTO comments (
+        comment,
         collector_id,
         post_id)
       VALUES ($1, $2, $3) RETURNING *
       `,
       [comment, collector_id, postId]
     );
-    res.json(newComment);
+    res.status(201).json(newComment); // 201-means created
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send(error.message); //500 internal server error
+  }
+});
+commentsRouter.patch("/comments/:comment_id", auth, async (req, res) => {
+  try {
+    const comment_id = req.params.comment_id;
+    const { collector_id } = req.collector;
+    const { comment } = req.body;
+    const newComment = await pool.query(
+      `
+    UPDATE comments set comment =$1 
+    WHERE collector_id =$2 AND comment_id = $3 RETURNING *`,
+      [comment, collector_id, comment_id]
+    );
+    console.log(req.collector);
+    res.json(newComment.rows);
   } catch (error) {
     console.log(error.message);
     res.status(500).send(error.message);
   }
 });
-commentsRouter.patch(
-  "/posts/:postId/comments/:comment_id",
-  auth,
-  async (req, res) => {
-    try {
-      const comment_id = req.params.comment_id;
-      const postId = req.params.postId;
-      const { collector_id } = req.collector;
-      const { comment } = req.body;
-      const newComment = await pool.query(
-        `
-    UPDATE comments set comment =$1 
-    WHERE collector_id =$2 AND comment_id = $3 RETURNING *`,
-        [comment, collector_id, comment_id]
-      );
-      console.log(req.collector);
-      res.json(newComment.rows);
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).send(error.message);
-    }
-  }
-);
 
 // DELETING A COMMENT ON A SPECIFIC POST -----WORKING
-commentsRouter.delete(
-  "/posts/:postId/comments/:comment_id",
-  auth,
-  async (req, res) => {
-    try {
-      const { collector_id } = req.collector;
-      const comment_id = req.params.comment_id;
-      const postId = req.params.postId;
+commentsRouter.delete("/comments/:comment_id", auth, async (req, res) => {
+  try {
+    const { collector_id } = req.collector;
+    const comment_id = req.params.comment_id;
 
-      const newComment = await pool.query(
-        `
+    const newComment = await pool.query(
+      `
   DELETE FROM comments 
   WHERE collector_id =$1 AND comment_id = $2 RETURNING *`,
-        [collector_id, comment_id]
-      );
-      if (newComment.rowCount > 0) {
-        res.send(`Comment with id :${comment_id} succesfully deleted!`);
-      } else {
-        res.status(404).send("Already deleted");
-      }
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).send(error.message);
+      [collector_id, comment_id]
+    );
+    if (newComment.rowCount > 0) {
+      res.send(`Comment with id :${comment_id} succesfully deleted!`);
+    } else {
+      res.status(404).send("Not found");
     }
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send(error.message);
   }
-);
+});
 
 export default commentsRouter;
