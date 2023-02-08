@@ -4,12 +4,48 @@ import {
   useRouteError,
   Form,
 } from "react-router-dom";
+import { useState } from "react";
 
 export const UserProfile = () => {
   const profile = useLoaderData();
-  // let actionData = useActionData();
+  console.log(profile);
+
   let error = useRouteError();
-  console.log(error);
+  // const [profile1, setProfile1] = useState(useLoaderData());
+  // const [first_name, setFirstName] = useState(profile.first_name);
+  // const [username, setUserName] = useState(profile.username);
+  // const [last_name, setLastName] = useState(profile.last_name);
+  // const [email, setEmail] = useState(profile.email);
+  // const [street, setStreet] = useState(profile.street);
+  // const [city, setCity] = useState(profile.city);
+  // const [province, setProvince] = useState(profile.province);
+  // const [zip, setZip] = useState(profile.zip);
+  // const [phone, setPhone] = useState(profile.phone);
+  // const [birth_date, setBirthDate] = useState(profile.birth_date);
+  // const [sex, setSex] = useState(profile.sex);
+  // const [country, setCountry] = useState(profile.country);
+  // const updateProfile = async (id) => {
+  //   const response = await fetch("http://localhost:8000/user/" + id, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: {
+  //       first_name: first_name,
+  //       last_name: last_name,
+  //       email: email,
+  //       street: street,
+  //       city: city,
+  //       province: province,
+  //       zip: zip,
+  //       phone: phone,
+  //       birth_date: birth_date,
+  //       sex: sex,
+  //       country: country,
+  //       username: username,
+  //     },
+  //   });
+  // };
 
   return (
     <div className="container-xl px-4 mt-4">
@@ -21,68 +57,73 @@ export const UserProfile = () => {
             <Form method="post">
               {/* <!-- Form Group (username)--> */}
               <div className="mb-3">
-                <label className="small mb-1" htmlFor="inputUsername">
-                  Username
-                </label>
+                <label className="small mb-1">Username</label>
                 <input
                   defaultValue={profile.username}
                   name="username"
                   className="form-control"
                   id="inputUsername"
                   type="text"
+                  // onChange={(e) => {
+                  //   setUserName(e.target.value);
+                  // }}
                 />
               </div>
               {/* <!-- Form Row--> */}
               <div className="row gx-3 mb-3">
                 {/* <!-- Form Group (full name)--> */}
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputFirstName">
-                    First Name
-                  </label>
+                  <label className="small mb-1">First Name</label>
                   <input
                     className="form-control"
                     name="first_name"
                     id="inputFirstName"
                     type="text"
                     defaultValue={profile.first_name}
+                    // onChange={(e) => {
+                    //   setFirstName(e.target.value);
+                    // }}
                   />
                 </div>
 
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputLastName">
-                    Last Name
-                  </label>
+                  <label className="small mb-1">Last Name</label>
                   <input
                     className="form-control"
                     name="last_name"
                     id="inputLastName"
                     type="text"
                     defaultValue={profile.last_name}
+                    // onChange={(e) => {
+                    //   setLastName(e.target.value);
+                    // }}
                   />
                 </div>
                 {/* <!-- Form Group (street)--> */}
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputStreet">
-                    Street
-                  </label>
+                  <label className="small mb-1">Street</label>
                   <input
                     className="form-control"
                     name="street"
                     id="inputStreet"
                     type="text"
                     defaultValue={profile.street}
+                    // onChange={(e) => {
+                    //   setStreet(e.target.value);
+                    // }}
                   />
                 </div>
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputZip">
-                    Zip Code
-                  </label>
+                  <label className="small mb-1">Zip Code</label>
                   <input
                     className="form-control"
                     name="zip"
                     id="inputZip"
                     type="text"
                     defaultValue={profile.zip}
+                    // onChange={(e) => {
+                    //   setZip(e.target.value);
+                    // }}
                   />
                 </div>
               </div>
@@ -90,63 +131,65 @@ export const UserProfile = () => {
               <div className="row gx-3 mb-3">
                 {/* <!-- Form Group (city)--> */}
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputOrgName">
-                    City
-                  </label>
+                  <label className="small mb-1">City</label>
                   <input
                     className="form-control"
                     name="city"
                     id="inputOrgName"
                     type="text"
                     defaultValue={profile.city}
+                    // onChange={(e) => {
+                    //   setCity(e.target.value);
+                    // }}
                   />
                 </div>
                 {/* <!-- Form Group (region)--> */}
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputLocation">
-                    Province
-                  </label>
+                  <label className="small mb-1">Province</label>
                   <input
                     className="form-control"
                     name="province"
                     id="inputLocation"
                     type="text"
                     defaultValue={profile.province}
+                    // onChange={(e) => {
+                    //   setProvince(e.target.value);
+                    // }}
                   />
                 </div>
               </div>
               {/* <!-- Form Group (email address)--> */}
               <div className="mb-3">
-                <label className="small mb-1" htmlFor="inputEmailAddress">
-                  Email address
-                </label>
+                <label className="small mb-1">Email address</label>
                 <input
                   className="form-control"
                   name="email"
                   id="inputEmailAddress"
                   type="email"
                   defaultValue={profile.email}
+                  // onChange={(e) => {
+                  //   setEmail(e.target.value);
+                  // }}
                 />
               </div>
               {/* <!-- Form Row--> */}
               <div className="row gx-3 mb-3">
                 {/* <!-- Form Group (phone number)--> */}
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputPhone">
-                    Phone number
-                  </label>
+                  <label className="small mb-1">Phone number</label>
                   <input
                     className="form-control"
                     name="phone"
                     id="inputPhone"
                     type="tel"
                     defaultValue={profile.phone}
+                    // onChange={(e) => {
+                    //   setPhone(e.target.value);
+                    // }}
                   />
                 </div>
                 <div className="col-md-6">
-                  <label className="small mb-1" htmlFor="inputBirth_date">
-                    Birthday
-                  </label>
+                  <label className="small mb-1">Birthday</label>
                   <input
                     className="form-control"
                     name="birth_date"
@@ -155,6 +198,9 @@ export const UserProfile = () => {
                     defaultValue={new Date(profile.birth_date)
                       .toISOString()
                       .substring(0, 10)}
+                    // onChange={(e) => {
+                    //   setBirthDate(e.target.value);
+                    // }}
                   />
                 </div>
               </div>
@@ -167,6 +213,9 @@ export const UserProfile = () => {
                   name="optradio"
                   defaultChecked={profile.sex === "M"}
                   value="option1"
+                  // onChange={(e) => {
+                  //   setSex(e.target.value);
+                  // }}
                 />
                 <label class="form-check-label" for="radio1">
                   Male
@@ -180,13 +229,20 @@ export const UserProfile = () => {
                   name="optradio"
                   defaultChecked={profile.sex === "F"}
                   value="option2"
+                  // onChange={(e) => {
+                  //   setSex(e.target.value);
+                  // }}
                 />
                 <label class="form-check-label" for="radio2">
                   Female
                 </label>
               </div>
-              {/* <!-- Save changes button--> */}
-              <button className="btn btn-primary" type="submit">
+              {/* <!-- Edit button--> */}
+              <button
+                // onClick={updateProfile(localStorage.getItem("collector_id"))}
+                className="btn btn-primary"
+                type="submit"
+              >
                 Edit
               </button>
             </Form>
@@ -196,19 +252,3 @@ export const UserProfile = () => {
     </div>
   );
 };
-
-// export const UserProfile = () => {
-//   const profile = useLoaderData();
-//   console.log(profile);
-//   return <div>HELLO !!!!</div>;
-// };
-
-// SQL FILE INTERACTION TABLE
-// CREATE TABLE interaction(
-//   interaction_id INTEGER REFERENCES collector(id),
-//   collector_id INTEGER NOT NULL,
-//   likes varchar(255) UNIQUE NOT NULL,
-//   comments varchar(255) UNIQUE NOT NULL,
-//   shares varchar(255) UNIQUE NOT NULL,
-// id SERIAL PRIMARY KEY
-// );

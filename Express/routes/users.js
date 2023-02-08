@@ -222,7 +222,7 @@ router
         `SELECT * FROM public.collector WHERE collector_id=$1`,
         [id]
       );
-      console.log(`   OH NO IT IS NOT WORKING !!!  `);
+
       if (users.rows.length === 0) {
         return res.status(401).send("Cannot get that user data");
       } else {
@@ -250,8 +250,9 @@ router
       phone = $8,
       birth_date = $9,
       sex = $10,
-      country = $11 
-      WHERE collector_id =$12 RETURNING *`,
+      country = $11 ,
+      username = $12
+      WHERE collector_id =$13 RETURNING *`,
         [
           newValue.first_name,
           newValue.last_name,
@@ -264,9 +265,11 @@ router
           newValue.birth_date,
           newValue.sex,
           newValue.country,
+          newValue.username,
           id,
         ]
       );
+
       res.json({
         msg: `Update User With ID ${req.params.id}`,
         data: user,

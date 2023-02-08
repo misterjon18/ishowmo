@@ -32,7 +32,7 @@ const router = createBrowserRouter(
           loader={async () => {
             try {
               const result = await app.get("/userlist");
-              console.log(result);
+
               console.log(result.data);
               return result.data;
             } catch (err) {
@@ -44,6 +44,17 @@ const router = createBrowserRouter(
         <Route
           path="profile"
           element={<UserProfile />}
+          action={async ({ request }) => {
+            const data = Object.fromEntries(await request.formData());
+            try {
+              const user = localStorage.getItem("collector_id");
+              await app.put(`/user/${user}`, data);
+            } catch (err) {
+              console.log(err);
+              throw err.response.data;
+            }
+            return null;
+          }}
           loader={async () => {
             try {
               const result = await app.get(
@@ -56,7 +67,6 @@ const router = createBrowserRouter(
                 }
               );
 
-              console.log(result.data);
               return result.data[0];
             } catch (err) {
               console.log(err);
@@ -87,7 +97,6 @@ const router = createBrowserRouter(
         path="sign-up"
         element={<SignUp />}
         action={async ({ request }) => {
-          console.log("Hello");
           const data = Object.fromEntries(await request.formData());
           try {
             await app.post("/register", data);
@@ -116,8 +125,6 @@ const router = createBrowserRouter(
               "Authorization"
             ] = `Bearer ${res.data.token}`;
             localStorage.setItem("token", res.data.token);
-
-            // EDIT
             localStorage.setItem("collector_id", res.data.id);
             sessionStorage.setItem("welcome", "true");
 

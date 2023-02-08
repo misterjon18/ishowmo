@@ -20,7 +20,6 @@ function Sidebar() {
       <ul className="SidebarList">
         <div style={{ height: "calc(100vh - 50px)" }} className="Sidebar-main">
           {SidebarData.map((val, key) => {
-            console.log(key);
             return (
               <li
                 key={key}
