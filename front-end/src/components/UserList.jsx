@@ -56,16 +56,3 @@ export const UserList = () => {
     </>
   );
 };
-
-// WORKING CODE
-
-{
-  /* <table>
-{users.map((user) => (
-  <tr key={user.username}>
-    <td>{user.username}</td>
-    <td>{user.first_name}</td>
-  </tr>
-))}
-</table> */
-}

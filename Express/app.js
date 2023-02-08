@@ -8,7 +8,7 @@ import fs from "fs/promises";
 // APIs-----------
 import postLikesRouter from "./routes/postLikes.js";
 import router from "./routes/users.js";
-import collectionRouter from "./routes/collection.js";
+import collectionsRouter from "./routes/collection.js";
 import commentsRouter from "./routes/comments.js";
 import postsRouter from "./routes/posts.js";
 const pool = connectDatabase();
@@ -37,7 +37,7 @@ pool.connect((err) => {
 });
 app.use("/", postLikesRouter);
 app.use("/", router);
-app.use("/", collectionRouter);
+app.use("/", collectionsRouter);
 app.use("/", commentsRouter);
 app.use("/", postsRouter);
 
