@@ -46,7 +46,9 @@ export const UserProfile = () => {
   //     },
   //   });
   // };
-
+  if (typeof profile === "undefined") {
+    return <div>loading...</div>;
+  }
   return (
     <div className="container-xl px-4 mt-4">
       <div className="col-xl-8">
@@ -210,9 +212,9 @@ export const UserProfile = () => {
                   type="radio"
                   class="form-check-input"
                   id="radio1"
-                  name="optradio"
+                  name="sex"
                   defaultChecked={profile.sex === "M"}
-                  value="option1"
+                  value="M"
                   // onChange={(e) => {
                   //   setSex(e.target.value);
                   // }}
@@ -226,9 +228,9 @@ export const UserProfile = () => {
                   type="radio"
                   class="form-check-input"
                   id="radio2"
-                  name="optradio"
+                  name="sex"
                   defaultChecked={profile.sex === "F"}
-                  value="option2"
+                  value="F"
                   // onChange={(e) => {
                   //   setSex(e.target.value);
                   // }}

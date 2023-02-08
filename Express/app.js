@@ -52,10 +52,7 @@ app.get("/contact", async (req, res) => {
     res.end("Error Reading Page");
   }
 });
-app.get("/secret", (req, res) => {
-  console.log("SECRET");
-  res.status(403).end(); // 403 means Forbidden
-});
+
 app.get("*", (req, res) => {
   res.status(404).send("Sorry, we can't find the specified page :(");
 });

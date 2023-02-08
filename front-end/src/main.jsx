@@ -48,7 +48,11 @@ const router = createBrowserRouter(
             const data = Object.fromEntries(await request.formData());
             try {
               const user = localStorage.getItem("collector_id");
-              await app.put(`/user/${user}`, data);
+              await app.put(`/user/${user}`, data, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              });
             } catch (err) {
               console.log(err);
               throw err.response.data;
