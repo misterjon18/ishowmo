@@ -1,11 +1,8 @@
-/*
-*
-* ==========================================
-* CUSTOM UTIL CLASSES
-* ==========================================
-*
-*/
-.table-fixed tbody {
+.container {
+  margin-left: 250px;
+}
+
+/* .table-fixed tbody {
   height: 300px;
   overflow-y: auto;
   width: 100%;
@@ -36,4 +33,4 @@ body {
   background: -webkit-linear-gradient(to right, #74ebd5, #acb6e5);
   background: linear-gradient(to right, #74ebd5, #acb6e5);
   min-height: 100vh;
-}
+} */

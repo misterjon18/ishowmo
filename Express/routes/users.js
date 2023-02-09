@@ -237,7 +237,7 @@ router
     try {
       const id = req.params.id;
       const newValue = req.body;
-      console.log(newValue);
+
       const user = await pool.query(
         `
             UPDATE collector set  

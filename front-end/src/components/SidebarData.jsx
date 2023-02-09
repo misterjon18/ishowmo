@@ -18,11 +18,7 @@ export const SidebarData = [
     icon: <CollectionsIcon />,
     link: "/collection",
   },
-  {
-    title: "Reviews",
-    icon: <ReviewsIcon />,
-    link: "/reviews",
-  },
+
   {
     title: "Collectors",
     icon: <PeopleAltIcon />,

@@ -11,46 +11,12 @@ export const UserProfile = () => {
   console.log(profile);
 
   let error = useRouteError();
-  // const [profile1, setProfile1] = useState(useLoaderData());
-  // const [first_name, setFirstName] = useState(profile.first_name);
-  // const [username, setUserName] = useState(profile.username);
-  // const [last_name, setLastName] = useState(profile.last_name);
-  // const [email, setEmail] = useState(profile.email);
-  // const [street, setStreet] = useState(profile.street);
-  // const [city, setCity] = useState(profile.city);
-  // const [province, setProvince] = useState(profile.province);
-  // const [zip, setZip] = useState(profile.zip);
-  // const [phone, setPhone] = useState(profile.phone);
-  // const [birth_date, setBirthDate] = useState(profile.birth_date);
-  // const [sex, setSex] = useState(profile.sex);
-  // const [country, setCountry] = useState(profile.country);
-  // const updateProfile = async (id) => {
-  //   const response = await fetch("http://localhost:8000/user/" + id, {
-  //     method: "PUT",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: {
-  //       first_name: first_name,
-  //       last_name: last_name,
-  //       email: email,
-  //       street: street,
-  //       city: city,
-  //       province: province,
-  //       zip: zip,
-  //       phone: phone,
-  //       birth_date: birth_date,
-  //       sex: sex,
-  //       country: country,
-  //       username: username,
-  //     },
-  //   });
-  // };
+
   if (typeof profile === "undefined") {
     return <div>loading...</div>;
   }
   return (
-    <div className="container-xl px-4 mt-4">
+    <div className="container-xl px-4 mt-4" style={{ marginLeft: 400 }}>
       <div className="col-xl-8">
         {/* <!-- Account details card--> */}
         <div className="card mb-4">
@@ -66,9 +32,6 @@ export const UserProfile = () => {
                   className="form-control"
                   id="inputUsername"
                   type="text"
-                  // onChange={(e) => {
-                  //   setUserName(e.target.value);
-                  // }}
                 />
               </div>
               {/* <!-- Form Row--> */}
@@ -82,9 +45,6 @@ export const UserProfile = () => {
                     id="inputFirstName"
                     type="text"
                     defaultValue={profile.first_name}
-                    // onChange={(e) => {
-                    //   setFirstName(e.target.value);
-                    // }}
                   />
                 </div>
 
@@ -96,9 +56,6 @@ export const UserProfile = () => {
                     id="inputLastName"
                     type="text"
                     defaultValue={profile.last_name}
-                    // onChange={(e) => {
-                    //   setLastName(e.target.value);
-                    // }}
                   />
                 </div>
                 {/* <!-- Form Group (street)--> */}
@@ -110,9 +67,6 @@ export const UserProfile = () => {
                     id="inputStreet"
                     type="text"
                     defaultValue={profile.street}
-                    // onChange={(e) => {
-                    //   setStreet(e.target.value);
-                    // }}
                   />
                 </div>
                 <div className="col-md-6">
@@ -123,9 +77,6 @@ export const UserProfile = () => {
                     id="inputZip"
                     type="text"
                     defaultValue={profile.zip}
-                    // onChange={(e) => {
-                    //   setZip(e.target.value);
-                    // }}
                   />
                 </div>
               </div>
@@ -140,9 +91,6 @@ export const UserProfile = () => {
                     id="inputOrgName"
                     type="text"
                     defaultValue={profile.city}
-                    // onChange={(e) => {
-                    //   setCity(e.target.value);
-                    // }}
                   />
                 </div>
                 {/* <!-- Form Group (region)--> */}
@@ -154,9 +102,6 @@ export const UserProfile = () => {
                     id="inputLocation"
                     type="text"
                     defaultValue={profile.province}
-                    // onChange={(e) => {
-                    //   setProvince(e.target.value);
-                    // }}
                   />
                 </div>
               </div>
@@ -169,9 +114,6 @@ export const UserProfile = () => {
                   id="inputEmailAddress"
                   type="email"
                   defaultValue={profile.email}
-                  // onChange={(e) => {
-                  //   setEmail(e.target.value);
-                  // }}
                 />
               </div>
               {/* <!-- Form Row--> */}
@@ -185,9 +127,6 @@ export const UserProfile = () => {
                     id="inputPhone"
                     type="tel"
                     defaultValue={profile.phone}
-                    // onChange={(e) => {
-                    //   setPhone(e.target.value);
-                    // }}
                   />
                 </div>
                 <div className="col-md-6">
@@ -200,9 +139,6 @@ export const UserProfile = () => {
                     defaultValue={new Date(profile.birth_date)
                       .toISOString()
                       .substring(0, 10)}
-                    // onChange={(e) => {
-                    //   setBirthDate(e.target.value);
-                    // }}
                   />
                 </div>
               </div>
@@ -215,9 +151,6 @@ export const UserProfile = () => {
                   name="sex"
                   defaultChecked={profile.sex === "M"}
                   value="M"
-                  // onChange={(e) => {
-                  //   setSex(e.target.value);
-                  // }}
                 />
                 <label class="form-check-label" for="radio1">
                   Male
@@ -231,20 +164,13 @@ export const UserProfile = () => {
                   name="sex"
                   defaultChecked={profile.sex === "F"}
                   value="F"
-                  // onChange={(e) => {
-                  //   setSex(e.target.value);
-                  // }}
                 />
                 <label class="form-check-label" for="radio2">
                   Female
                 </label>
               </div>
               {/* <!-- Edit button--> */}
-              <button
-                // onClick={updateProfile(localStorage.getItem("collector_id"))}
-                className="btn btn-primary"
-                type="submit"
-              >
+              <button className="btn btn-primary" type="submit">
                 Edit
               </button>
             </Form>

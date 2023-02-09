@@ -9,10 +9,10 @@ export const Layout = () => {
         gap: 30,
         height: "100vh",
         oveflow: "auto",
-        backgroundColor: "green",
+        backgroundColor: "#38b000",
       }}
     >
-      <div style={{ backgroundColor: "pink" }}>
+      <div>
         <Sidebar />
       </div>
 

@@ -13,7 +13,6 @@ import {
 } from "react-router-dom";
 import { Login } from "./login";
 import { SignUp } from "./sign-up";
-
 // -------->
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";
@@ -33,7 +32,6 @@ const router = createBrowserRouter(
             try {
               const result = await app.get("/userlist");
 
-              console.log(result.data);
               return result.data;
             } catch (err) {
               console.log(err);
@@ -79,6 +77,30 @@ const router = createBrowserRouter(
           }}
           errorElement={<UserProfile />}
         ></Route>
+        {/* ------EDIT */}
+        <Route
+          path="dashboard"
+          element={<Dashboard />}
+          loader={async () => {
+            try {
+              const result = await app.get(
+                "/me/posts",
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+              console.log(result.data.posts);
+              return result.data.posts;
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+          errorElement={<Dashboard />}
+        ></Route>
         <Route path="dashboard" element={<Dashboard />} />
       </Route>
       <Route
@@ -97,6 +119,7 @@ const router = createBrowserRouter(
         }}
         errorElement={<ForgotPassword />}
       />
+
       <Route
         path="sign-up"
         element={<SignUp />}
@@ -113,8 +136,6 @@ const router = createBrowserRouter(
         errorElement={<SignUp hasError />}
       />
 
-      {/* Homepage */}
-      {/* <Route index element={<App />}></Route> */}
       <Route
         path="login"
         element={<Login />}
