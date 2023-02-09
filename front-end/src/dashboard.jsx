@@ -2,33 +2,38 @@ import { useEffect } from "react";
 import { useLoaderData } from "react-router-dom";
 
 // ------------EDIT
-import "./styles/Sidebar.css";
+// import "./styles/Sidebar.css";
 
 const Dashboard = () => {
-  const images = useLoaderData();
-  useEffect(() => {
-    console.log(images);
-    return () => {
-      if (sessionStorage.getItem("welcome") == "true") {
-        alert("Successfully login");
-        sessionStorage.setItem("welcome", "false");
-      }
-    };
-  }, []);
+  const posts = useLoaderData();
+  console.log(posts.length);
+  // useEffect(() => {
+  //   return () => {
+  //     if (sessionStorage.getItem("welcome") == "true") {
+  //       alert("Successfully login");
+  //       sessionStorage.setItem("welcome", "false");
+  //     }
+  //   };
+  // }, []);
   return (
     <>
-      <div className="App">
-        hellohellohellohellohellohellohellohellohellohellohellohellohellohello
-        {images.map((image) => {
-          <div key={image.source}>
-            <img
-              src={image.source} // get source name in backend
-              alt="some image"
-              width="500"
-              height="500"
-            />
-          </div>;
-        })}
+      <div class="container">
+        <div class="row">
+          {posts.map((post) => {
+            return (
+              <div class="col-4">
+                <img src={post.source} style={{ width: "100%" }} />
+              </div>
+            );
+          })}
+          <div class="col">1 of 2</div>
+          <div class="col">2 of 2</div>
+        </div>
+        <div class="row">
+          <div class="col">1 of 3</div>
+          <div class="col">2 of 3</div>
+          <div class="col">3 of 3</div>
+        </div>
       </div>
     </>
   );

@@ -92,14 +92,14 @@ const router = createBrowserRouter(
                   },
                 }
               );
-              console.log(result.data.posts);
+              console.log(result);
               return result.data.posts;
             } catch (err) {
               console.log(err);
               throw err;
             }
           }}
-          errorElement={<Dashboard />}
+          // errorElement={<Dashboard />}
         ></Route>
         <Route path="dashboard" element={<Dashboard />} />
       </Route>

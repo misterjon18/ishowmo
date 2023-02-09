@@ -11,6 +11,7 @@ import router from "./routes/users.js";
 import collectionsRouter from "./routes/collection.js";
 import commentsRouter from "./routes/comments.js";
 import postsRouter from "./routes/posts.js";
+
 const pool = connectDatabase();
 const app = express();
 const PORT = 8000;
@@ -21,6 +22,7 @@ app.use(
     createParentPath: true,
   }) //to read req.files
 );
+app.use("/uploads", express.static("uploads"));
 app.use(cors()); //for connecting backend and frontend
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));

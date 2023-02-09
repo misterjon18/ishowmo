@@ -6,7 +6,7 @@ import { auth } from "../middleware/auth.js";
 const pool = connectDatabase();
 // Lists collector collections ---- WORKING
 collectionsRouter.get(
-  "/collections/:collectorId/collectors",
+  "/collectors/:collectorId/collections",
   auth,
   async (req, res) => {
     try {
@@ -40,7 +40,7 @@ collectionsRouter.get("/collections/:collectionId", auth, async (req, res) => {
   }
 });
 
-// POSTING COLLECTIONS ----NOT WORKING
+// POSTING COLLECTIONS ---- WORKING
 collectionsRouter.post(
   "/collections",
   auth,
@@ -49,18 +49,26 @@ collectionsRouter.post(
     try {
       console.log("COLLECTIONS");
       const { collector_id } = req.collector;
-      const file = req.files.picture;
+
+      const { name, type } = req.body;
 
       const newCollection = await pool.query(
-        `INSERT INTO collection (collector_id,type,name)
-      VALUES ($1, $2,$3,$4) RETURNING *
+        `
+      INSERT INTO collection
+      (collector_id, type, name)
+      VALUES 
+      ($1, $2, $3) RETURNING *
       `,
-        [collector_id, file.data, file.name]
+        [collector_id, type.toLowerCase(), name]
       );
       res.json(newCollection.rows);
     } catch (error) {
-      console.log(error.message);
-      res.status(500).send(error.message);
+      console.log(error);
+      if (error.constraint === "check_type") {
+        res.status(400).send(error.message);
+      } else {
+        res.status(500).send(error.message);
+      }
     }
   }
 );
@@ -75,7 +83,7 @@ collectionsRouter.put("/collections/:collectionId", auth, async (req, res) => {
       `UPDATE collection SET name = $1, type = $2
        WHERE collection_id = $3 AND collector_id = $4
       RETURNING *`,
-      [name, type, collectionId, collector_id]
+      [name, type.toLowerCase(), collectionId, collector_id]
     );
     res.json(newCollection.rows);
   } catch (error) {
@@ -83,7 +91,7 @@ collectionsRouter.put("/collections/:collectionId", auth, async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-
+// DELETE COLLECTION WITH ID ------WORKING
 collectionsRouter.delete(
   "/collections/:collectionId",
   auth,
@@ -93,8 +101,8 @@ collectionsRouter.delete(
       const collectionId = req.params.collectionId;
       const newCollection = await pool.query(
         `
-  DELETE FROM collection 
-  WHERE collector_id =$1 AND collectionId = $2 RETURNING *`,
+        DELETE FROM collection 
+        WHERE collector_id =$1 AND collection_id = $2 RETURNING *`,
         [collector_id, collectionId]
       );
       if (newCollection.rowCount > 0) {

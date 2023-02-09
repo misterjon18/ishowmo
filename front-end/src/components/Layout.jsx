@@ -6,10 +6,10 @@ export const Layout = () => {
     <div
       style={{
         display: "flex",
-        gap: 30,
+        // gap: 30,
         height: "100vh",
         oveflow: "auto",
-        backgroundColor: "#38b000",
+        // backgroundColor: "#38b000",
       }}
     >
       <div>
