@@ -6,7 +6,6 @@ import { useLoaderData } from "react-router-dom";
 
 const Dashboard = () => {
   const posts = useLoaderData();
-  console.log(posts.length);
   // useEffect(() => {
   //   return () => {
   //     if (sessionStorage.getItem("welcome") == "true") {
@@ -26,13 +25,6 @@ const Dashboard = () => {
               </div>
             );
           })}
-          <div class="col">1 of 2</div>
-          <div class="col">2 of 2</div>
-        </div>
-        <div class="row">
-          <div class="col">1 of 3</div>
-          <div class="col">2 of 3</div>
-          <div class="col">3 of 3</div>
         </div>
       </div>
     </>

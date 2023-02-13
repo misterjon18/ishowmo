@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import app from "../lib/axios-config";
-import Dashboard from "./dashboard";
+import Dashboard from "./pages/dashboard";
 import { Layout } from "./components/Layout";
 import {
   Route,
@@ -11,8 +11,8 @@ import {
   createRoutesFromElements,
   redirect,
 } from "react-router-dom";
-import { Login } from "./login";
-import { SignUp } from "./sign-up";
+import { Login } from "./pages/login";
+import { SignUp } from "./pages/sign-up";
 // -------->
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";

@@ -1,5 +1,5 @@
 import { Form, useSearchParams } from "react-router-dom";
-import "./App.css";
+import "../App.css";
 // ADD CSS
 import React from "react";
 
