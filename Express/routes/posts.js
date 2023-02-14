@@ -47,7 +47,7 @@ postsRouter.get("/posts/:postId", auth, async (req, res) => {
       "SELECT * FROM public.posts WHERE post_id = $1",
       [postId]
     );
-    res.status(200).json({ posts: posts.rows });
+    res.status(200).json({ post: posts.rows[0] });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error fetching posts" });

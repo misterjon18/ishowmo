@@ -18,6 +18,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { UserList } from "./components/UserList";
 import { UserProfile } from "./components/UserProfile";
+import Post from "./pages/Post";
 
 // Add CSS
 
@@ -77,7 +78,30 @@ const router = createBrowserRouter(
           }}
           errorElement={<UserProfile />}
         ></Route>
-        {/* ------EDIT */}
+
+        {/* postId*/}
+        <Route
+          path="posts/:postId"
+          element={<Post />}
+          loader={async ({ params }) => {
+            try {
+              const result = await app.get(
+                `/posts/${params.postId}`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+
+              return result.data.post;
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+        ></Route>
         <Route
           path="dashboard"
           element={<Dashboard />}

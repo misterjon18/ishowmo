@@ -6,14 +6,7 @@ import { useLoaderData } from "react-router-dom";
 
 const Dashboard = () => {
   const posts = useLoaderData();
-  // useEffect(() => {
-  //   return () => {
-  //     if (sessionStorage.getItem("welcome") == "true") {
-  //       alert("Successfully login");
-  //       sessionStorage.setItem("welcome", "false");
-  //     }
-  //   };
-  // }, []);
+
   return (
     <>
       <div class="container">
