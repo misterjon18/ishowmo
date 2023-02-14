@@ -169,6 +169,17 @@ export const UserProfile = () => {
                   Female
                 </label>
               </div>
+              {/* Country  */}
+              <div className="col-md-6">
+                <label className="small mb-1">Country</label>
+                <input
+                  className="form-control"
+                  name="country"
+                  id="inputCountry"
+                  type="text"
+                  defaultValue={profile.country}
+                />
+              </div>
               {/* <!-- Edit button--> */}
               <button className="btn btn-primary" type="submit">
                 Edit

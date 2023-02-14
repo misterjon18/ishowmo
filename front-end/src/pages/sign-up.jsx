@@ -1,5 +1,4 @@
 import { Form } from "react-router-dom";
-// import ImageUpload from "./components/ImageUpload";
 
 import "../styles/Sign-up.css";
 import { useRef } from "react";

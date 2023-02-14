@@ -31,15 +31,7 @@ export const UserList = () => {
               </tr>
             </thead>
             <tbody>
-              {[
-                ...users,
-                ...users,
-                ...users,
-                ...users,
-                ...users,
-                ...users,
-                ...users,
-              ].map((user, index) => (
+              {users.map((user, index) => (
                 <tr key={user.username}>
                   <th scope="row" className="col-3">
                     {index + 1}

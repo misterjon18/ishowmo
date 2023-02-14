@@ -82,7 +82,7 @@ router.get("/userlist", async (req, res) => {
   }
 });
 //Routes
-router.post("/register", upload.single("picture"), async (req, res) => {
+router.post("/register", async (req, res) => {
   try {
     //take the username and password from the req.body
     const {
