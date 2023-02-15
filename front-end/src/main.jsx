@@ -108,7 +108,7 @@ const router = createBrowserRouter(
           loader={async () => {
             try {
               const result = await app.get(
-                "/me/posts",
+                "/posts",
                 // Pass the token and headers----------------
                 {
                   headers: {
@@ -117,7 +117,8 @@ const router = createBrowserRouter(
                 }
               );
               console.log(result);
-              return result.data.posts;
+
+              return result.data.posts; // Expects object from backend
             } catch (err) {
               console.log(err);
               throw err;
