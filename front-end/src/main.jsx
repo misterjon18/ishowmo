@@ -96,8 +96,17 @@ const router = createBrowserRouter(
                   },
                 }
               );
-
-              return result.data.post;
+              const result2 = await app.get(
+                `/posts/${params.postId}/comments`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+              console.log(result2);
+              return [result.data.post, result2.data];
             } catch (err) {
               console.log(err);
               throw err;
@@ -150,29 +159,7 @@ const router = createBrowserRouter(
             }
           }}
         ></Route>
-        {/* See own posts */}
-        {/* <Route
-          path="/me/posts"
-          element={<MyPosts />}
-          loader={async () => {
-            try {
-              const result = await app.get(
-                `/me/posts`,
-                // Pass the token and headers----------------
-                {
-                  headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                  },
-                }
-              );
 
-              return result.data;
-            } catch (err) {
-              console.log(err);
-              throw err;
-            }
-          }}
-        ></Route> */}
         <Route
           path="dashboard"
           element={<Dashboard />}
@@ -195,7 +182,6 @@ const router = createBrowserRouter(
               throw err;
             }
           }}
-          // errorElement={<Dashboard />}
         ></Route>
         <Route path="dashboard" element={<Dashboard />} />
       </Route>

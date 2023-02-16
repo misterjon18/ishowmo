@@ -9,7 +9,7 @@ commentsRouter.get("/posts/:postId/comments", auth, async (req, res) => {
   try {
     const postId = req.params.postId;
     const users = await pool.query(
-      "SELECT comment FROM public.comments WHERE post_id = $1 ORDER BY created_at",
+      "SELECT cm.created_at, cl.username, cm.comment FROM public.comments cm INNER JOIN collector cl ON cl.collector_id = cm.collector_id WHERE post_id = $1 ORDER BY created_at",
       [postId]
     );
     res.json(users.rows);
