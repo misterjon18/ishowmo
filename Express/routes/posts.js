@@ -11,7 +11,6 @@ const pool = connectDatabase();
 // WORKING ---------SEE ALL LATEST POSTS
 postsRouter.get("/posts", auth, async (req, res) => {
   try {
-    console.log("POSTS WORKING!!!");
     const posts = await pool.query(
       "SELECT * FROM posts ORDER BY created_at DESC"
     );
@@ -25,7 +24,7 @@ postsRouter.get("/posts", auth, async (req, res) => {
 postsRouter.get("/me/posts", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    console.log(collector_id); // 6
+    console.log(collector_id);
     console.log("WORKING !!!!!");
     const posts = await pool.query(
       "SELECT * FROM public.posts WHERE collector_id = $1",
@@ -61,11 +60,19 @@ postsRouter.get("/posts/:postId", auth, async (req, res) => {
 postsRouter.post("/posts", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-
-    console.log("POSTS  IS WORKING !!!");
+    console.log(req.body);
+    const collection_id = req.body.collection_id;
     const source = req.files.source;
     // const uploadPath = process.cwd() + "/uploads/" + source.name;
-
+    if (collection_id != null) {
+      const collection = await pool.query(
+        "SELECT * FROM public.collection WHERE collection_id = $1 AND collector_id = $2",
+        [collection_id, collector_id]
+      );
+      if (collection.rowCount === 0) {
+        return res.status(404).send("Not found");
+      }
+    }
     const publicPath = path.join(
       "uploads",
       "collectors",
@@ -89,11 +96,12 @@ postsRouter.post("/posts", auth, async (req, res) => {
       INSERT INTO posts (
         source,
         type,
-        collector_id
+        collector_id,
+        collection_id
       )
-      VALUES ($1, $2, $3) RETURNING *
+      VALUES ($1, $2, $3, $4) RETURNING *
       `,
-      [publicPath, source.mimetype, collector_id]
+      [publicPath, source.mimetype, collector_id, collection_id]
     );
     res.status(201).json(newPosts.rows[0]);
     // 201 means CREATED
@@ -102,6 +110,7 @@ postsRouter.post("/posts", auth, async (req, res) => {
     res.status(500).send(error.message);
   }
 });
+
 //  WORKING---- DELETE POST OF OWNER
 postsRouter.delete("/me/posts/:postId", auth, async (req, res) => {
   try {

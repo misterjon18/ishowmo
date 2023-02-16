@@ -40,7 +40,46 @@ collectionsRouter.get("/collections/:collectionId", auth, async (req, res) => {
   }
 });
 
-// POSTING COLLECTIONS ---- WORKING
+// Get login user's own collection ----- NOT WORKING
+collectionsRouter.get("/me/collections", auth, async (req, res) => {
+  try {
+    const { collector_id } = req.collector;
+
+    const collections = await pool.query(
+      `SELECT * FROM collection WHERE collector_id = $1`,
+      [collector_id]
+    );
+
+    res.json({ collections: collections.rows });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+// Collection of specific collector
+collectionsRouter.get(
+  "/collectors/:collector_id/collection",
+  auth,
+  async (req, res) => {
+    try {
+      const collector_id = req.params.collector_id;
+
+      const users = await pool.query(
+        `SELECT * FROM collection WHERE collector_id = $1`,
+        [collector_id]
+      );
+      if (users.rowCount > 0) {
+        res.json(users.rows);
+      } else {
+        res.status(404).send("Collection Not Found");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
+// POSTING THE LOGIN USER'S COLLECTIONS ---- WORKING
 collectionsRouter.post(
   "/collections",
   auth,
@@ -72,7 +111,7 @@ collectionsRouter.post(
     }
   }
 );
-// Updates the collection name and type ----WORKING
+// Updates the login user's collection name and type ----WORKING
 collectionsRouter.put("/collections/:collectionId", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
@@ -91,7 +130,7 @@ collectionsRouter.put("/collections/:collectionId", auth, async (req, res) => {
     res.status(500).send(error.message);
   }
 });
-// DELETE COLLECTION WITH ID ------WORKING
+// DELETE COLLECTION OF LOGIN USER  ------WORKING
 collectionsRouter.delete(
   "/collections/:collectionId",
   auth,

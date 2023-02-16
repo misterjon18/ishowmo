@@ -16,7 +16,7 @@ export const SidebarData = [
   {
     title: "My Collection",
     icon: <CollectionsIcon />,
-    link: "/collection",
+    link: "me/collections",
   },
 
   {

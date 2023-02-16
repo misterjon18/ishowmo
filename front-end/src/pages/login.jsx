@@ -2,78 +2,6 @@ import { Form, useSearchParams } from "react-router-dom";
 import "../App.css";
 // ADD CSS
 import React from "react";
-// EDIT --------
-
-// export function Login({ hasError }) {
-//   const params = useSearchParams();
-
-//   return (
-//     <section>
-//       {/* {useSearchParams.register == "true" && (
-//         <p>You have successfully registered! Please login.</p>
-//       )} */}
-
-//       <>
-//         <h1 id="login-msg">Welcome to iSHOWMO</h1>
-//         <div class=" d-flex justify-content-center align-items-center">
-//           <div class="col-md-4 p-5 shadow-sm border rounded-5 border-primary">
-//             <h2 class="text-center mb-4 text-primary">Login </h2>
-//             <Form method="post">
-//               <div class="mb-3">
-//                 <label for="username" class="form-label">
-//                   Username
-//                 </label>
-//                 <input
-//                   type="text"
-//                   name="username"
-//                   class="form-control bg-info bg-opacity-10 border border-primary"
-//                   id="username"
-//                   aria-describedby="emailHelp"
-//                 />
-//               </div>
-//               <div class="mb-3">
-//                 <label for="password" class="form-label">
-//                   Password
-//                 </label>
-//                 <input
-//                   type="password"
-//                   name="password"
-//                   class="form-control bg-info bg-opacity-10 border border-primary"
-//                   id="password"
-//                 />
-//               </div>
-//               <p class="small">
-//                 <a class="text-primary" href="forgot-password">
-//                   Forgot password?
-//                 </a>
-//               </p>
-//               <div class="d-grid">
-//                 <button class="btn btn-primary" type="submit" id="login">
-//                   Login
-//                 </button>
-//               </div>
-//             </Form>
-//             <div class="mt-3">
-//               <p class="mb-0  text-center">
-//                 Don't have an account?{" "}
-//                 <a href="./sign-up" class="text-primary fw-bold">
-//                   Sign Up
-//                 </a>
-//               </p>
-//               {hasError && (
-//                 <div class="alert alert-danger" role="alert">
-//                   An error has occurred. Please try again.
-//                 </div>
-//               )}
-//             </div>
-//           </div>
-//         </div>
-//       </>
-//     </section>
-//   );
-// }
-
-// EDIT _----------
 
 export const Login = ({ hasError }) => {
   const params = useSearchParams();
@@ -91,7 +19,14 @@ export const Login = ({ hasError }) => {
                   class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
                   style={{ color: "#709085" }}
                 ></i>
-                <span class="h1 fw-bold mb-0">ISHOWMO LOGO</span>
+                <span class="h1 fw-bold mb-0">
+                  <img
+                    alt="jigsaw-puzzle"
+                    id="brandLogo1"
+                    src="/src/assets/ishowmoLogo.png"
+                    style={{ width: "40%" }}
+                  />{" "}
+                </span>
               </div>
 
               <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">

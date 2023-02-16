@@ -43,14 +43,14 @@ export default function Post() {
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
                               <a href="#!" class="link-muted me-2">
-                                <i class="fas fa-thumbs-up me-1"></i>132
+                                <i class="fas fa-thumbs-up me-1"></i>1000
                               </a>
                               <a href="#!" class="link-muted">
-                                <i class="fas fa-thumbs-down me-1"></i>15
+                                <i class="fas fa-thumbs-down me-1"></i>155
                               </a>
                             </div>
                             <a href="#!" class="link-muted">
-                              <i class="fas fa-reply me-1"></i> Reply
+                              <i class="fas fa-reply me-1"></i>Edit
                             </a>
                           </div>
                         </div>
@@ -89,7 +89,7 @@ export default function Post() {
                               </a>
                             </div>
                             <a href="#!" class="link-muted">
-                              <i class="fas fa-reply me-1"></i> Reply
+                              <i class="fas fa-reply me-1"></i> Edit
                             </a>
                           </div>
                         </div>

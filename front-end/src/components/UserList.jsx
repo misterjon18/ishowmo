@@ -1,12 +1,13 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 import "../styles/UserList.css";
 export const UserList = () => {
   const users = useLoaderData();
+  console.log(users);
 
   return (
     <>
-      <div className="container" style={{ backgroundColor: "#38b000" }}>
+      <div className="container">
         <div
           style={{
             overflowY: "auto",
@@ -36,9 +37,18 @@ export const UserList = () => {
                   <th scope="row" className="col-3">
                     {index + 1}
                   </th>
+
                   <td className="col-3">{user.first_name}</td>
+
                   <td className="col-3">{user.last_name}</td>
-                  <td className="col-3">{user.username}</td>
+                  <td className="col-3">
+                    <Link
+                      style={{ textDecoration: "none" }}
+                      to={`/collectors/${user.collector_id}`}
+                    >
+                      {user.username}
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>

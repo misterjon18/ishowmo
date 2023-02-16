@@ -1,20 +1,25 @@
-import { useEffect } from "react";
-import { useLoaderData } from "react-router-dom";
-
-// ------------EDIT
-// import "./styles/Sidebar.css";
+import { Link, useLoaderData } from "react-router-dom";
+import "../styles/Dashboard.css";
 
 const Dashboard = () => {
   const posts = useLoaderData();
 
   return (
     <>
-      <div class="container">
-        <div class="row">
+      <div className="container">
+        <div className="row">
           {posts.map((post) => {
             return (
-              <div class="col-4">
-                <img src={post.source} style={{ width: "100%" }} />
+              <div className="col-4">
+                {/* use Link if your using internal links  */}
+                {/* only use a href for outside links e.g. facebook */}
+                <Link to={`/posts/${post.post_id}`}>
+                  <img
+                    id="collection-image"
+                    src={post.source}
+                    alt="posts-img"
+                  />
+                </Link>
               </div>
             );
           })}

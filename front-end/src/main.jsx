@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import app from "../lib/axios-config";
 import Dashboard from "./pages/dashboard";
+import Collection from "./pages/collection";
 import { Layout } from "./components/Layout";
 import {
   Route,
@@ -19,6 +20,7 @@ import { ForgotPassword } from "./pages/ForgotPassword";
 import { UserList } from "./components/UserList";
 import { UserProfile } from "./components/UserProfile";
 import Post from "./pages/Post";
+import { MyCollection } from "./pages/MyCollection";
 
 // Add CSS
 
@@ -102,6 +104,75 @@ const router = createBrowserRouter(
             }
           }}
         ></Route>
+        {/* Collections */}
+        <Route
+          path="collectors/:collectorId"
+          element={<Collection />}
+          loader={async ({ params }) => {
+            try {
+              const result = await app.get(
+                `/collectors/${params.collectorId}/collections`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+
+              return result.data;
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+        ></Route>
+        {/*See Own Collection */}
+        <Route
+          path="/me/collections"
+          element={<MyCollection />}
+          loader={async () => {
+            try {
+              const result = await app.get(
+                `/me/collections`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+
+              return result.data;
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+        ></Route>
+        {/* See own posts */}
+        {/* <Route
+          path="/me/posts"
+          element={<MyPosts />}
+          loader={async () => {
+            try {
+              const result = await app.get(
+                `/me/posts`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+
+              return result.data;
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+        ></Route> */}
         <Route
           path="dashboard"
           element={<Dashboard />}
@@ -152,7 +223,7 @@ const router = createBrowserRouter(
           const data = Object.fromEntries(await request.formData());
           try {
             await app.post("/register", data);
-            redirect("/login?register=true");
+            return redirect("/login?register=true");
           } catch (err) {
             console.log(err);
             throw err;
@@ -170,7 +241,6 @@ const router = createBrowserRouter(
             // needs validation need to check if login is successful
             const res = await app.post("/login", data);
 
-            // EDITABLE
             app.defaults.headers.common[
               "Authorization"
             ] = `Bearer ${res.data.token}`;
