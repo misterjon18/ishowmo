@@ -7,19 +7,19 @@ export const Login = ({ hasError }) => {
   const params = useSearchParams();
   return (
     <>
-      <section class="vh-100">
+      <section className="vh-100">
         {useSearchParams.register == "true" && (
           <p>You have successfully registered! Please login.</p>
         )}
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-sm-6 text-black">
-              <div class="px-5 ms-xl-4">
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-sm-6 text-black">
+              <div className="px-5 ms-xl-4" style={{ padding: "0px" }}>
                 <i
-                  class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
+                  className="fas fa-crow fa-2x me-3 pt-5 mt-xl-4"
                   style={{ color: "#709085" }}
                 ></i>
-                <span class="h1 fw-bold mb-0">
+                <span className="h1 fw-bold mb-0">
                   <img
                     alt="jigsaw-puzzle"
                     id="brandLogo1"
@@ -29,42 +29,42 @@ export const Login = ({ hasError }) => {
                 </span>
               </div>
 
-              <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+              <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
                 <Form method="post" style={{ width: "23rem" }}>
                   <h3
-                    class="fw-normal mb-3 pb-3"
+                    className="fw-normal mb-3 pb-3"
                     style={{ letterSpacing: "1px" }}
                   >
                     Log in
                   </h3>
 
-                  <div class="form-outline mb-4">
+                  <div className="form-outline mb-4">
                     <input
                       name="username"
                       type="text"
                       id="username"
-                      class="form-control form-control-lg"
+                      className="form-control form-control-lg"
                     />
-                    <label class="form-label" for="form2Example17">
+                    <label className="form-label" for="form2Example17">
                       Username
                     </label>
                   </div>
 
-                  <div class="form-outline mb-4">
+                  <div className="form-outline mb-4">
                     <input
                       type="password"
                       id="password"
                       name="password"
-                      class="form-control form-control-lg"
+                      className="form-control form-control-lg"
                     />
-                    <label class="form-label" for="form2Example27">
+                    <label className="form-label" for="form2Example27">
                       Password
                     </label>
                   </div>
 
-                  <div class="pt-1 mb-4">
+                  <div className="pt-1 mb-4">
                     <button
-                      class="btn btn-info btn-lg btn-block"
+                      className="btn btn-info btn-lg btn-block"
                       type="submit"
                       id="login"
                     >
@@ -72,20 +72,20 @@ export const Login = ({ hasError }) => {
                     </button>
                   </div>
 
-                  <p class="small mb-5 pb-lg-2">
-                    <a class="text-muted" href="forgot-password">
+                  <p className="small mb-5 pb-lg-2">
+                    <a className="text-muted" href="forgot-password">
                       Forgot password?
                     </a>
                   </p>
                   <p>
                     Don't have an account?{" "}
-                    <a href="./sign-up" class="link-info">
+                    <a href="./sign-up" className="link-info">
                       Register here
                     </a>
                   </p>
                   {/* hasError------- */}
                   {hasError && (
-                    <div class="alert alert-danger" role="alert">
+                    <div className="alert alert-danger" role="alert">
                       An error has occurred. Please try again.
                     </div>
                   )}
@@ -93,11 +93,11 @@ export const Login = ({ hasError }) => {
                 </Form>
               </div>
             </div>
-            <div class="col-sm-6 px-0 d-none d-sm-block">
+            <div className="col-sm-6 px-0 d-none d-sm-block">
               <img
                 src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-login-form/img3.webp"
                 alt="Login image"
-                class="w-100 vh-100"
+                className="w-100 vh-100"
                 style={{ objectFit: "cover", objectPosition: "left" }}
               />
             </div>

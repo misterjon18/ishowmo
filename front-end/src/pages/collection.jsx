@@ -14,7 +14,6 @@ const Collection = () => {
                   <div className="card-body">
                     <h5 className="card-title">{collection.name}</h5>
                     <p className="card-text">{collection.type}</p>
-                    {/* <Link to="">Go somewhere</Link>  link to another page for viewing collection */}
                   </div>
                 </div>
               </div>

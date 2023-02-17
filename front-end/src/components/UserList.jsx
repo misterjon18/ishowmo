@@ -1,9 +1,8 @@
 import { Link, useLoaderData } from "react-router-dom";
-
 import "../styles/UserList.css";
+
 export const UserList = () => {
   const users = useLoaderData();
-  console.log(users);
 
   return (
     <>

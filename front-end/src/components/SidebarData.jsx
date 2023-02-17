@@ -1,7 +1,6 @@
 import HomeIcon from "@mui/icons-material/Home";
 import CollectionsIcon from "@mui/icons-material/Collections";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import ReviewsIcon from "@mui/icons-material/Reviews";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 

@@ -1,8 +1,11 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, Form } from "react-router-dom";
 import { formatDistanceToNowStrict } from "date-fns";
+import { PRIMARY_COLOR } from "../constants";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+
 export default function Post() {
   const [post, comments] = useLoaderData();
-  console.log(comments);
+
   return (
     <>
       <div class="container">
@@ -19,16 +22,30 @@ export default function Post() {
               <div class="row d-flex justify-content-center">
                 <div
                   class="col-md-11 col-lg-9 col-xl-7"
-                  style={{ backgroundColor: "red" }}
+                  style={{ backgroundColor: PRIMARY_COLOR }}
                 >
+                  <Form method="post">
+                    <div className="my-2">
+                      <textarea
+                        class="form-control"
+                        name="comment"
+                        rows="3"
+                      ></textarea>
+                      <button type="submit" className="btn">
+                        Add Comment
+                      </button>
+                    </div>
+                  </Form>
                   {comments.map((comment) => {
-                    console.log(comment);
                     return (
                       <>
-                        <div class="d-flex flex-start mb-4">
+                        <div
+                          key={comment.comment_id}
+                          class="d-flex flex-start mb-4"
+                        >
                           <img
                             class="rounded-circle shadow-1-strong me-3"
-                            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+                            src="/src/assets/user.png"
                             alt="avatar"
                             width="65"
                             height="65"
@@ -47,15 +64,24 @@ export default function Post() {
                                 <div class="d-flex justify-content-between align-items-center">
                                   <div class="d-flex align-items-center">
                                     <a href="#!" class="link-muted me-2">
-                                      <i class="fas fa-thumbs-up me-1"></i>1000
-                                    </a>
-                                    <a href="#!" class="link-muted">
-                                      <i class="fas fa-thumbs-down me-1"></i>155
+                                      <ThumbUpOffAltIcon />
+                                      1000
                                     </a>
                                   </div>
-                                  <a href="#!" class="link-muted">
-                                    <i class="fas fa-reply me-1"></i>Edit
-                                  </a>
+                                  {localStorage.getItem("collector_id") ==
+                                    comment.collector_id && (
+                                    <Form method="delete">
+                                      <input
+                                        name="comment_id"
+                                        type="text"
+                                        style={{ display: "none" }}
+                                        value={comment.comment_id}
+                                      />
+                                      <button type="submit" className="btn">
+                                        <i></i>Delete
+                                      </button>
+                                    </Form>
+                                  )}
                                 </div>
                               </div>
                             </div>
