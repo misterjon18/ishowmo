@@ -83,16 +83,32 @@ const router = createBrowserRouter(
 
         {/* postId*/}
         <Route
+          forceRefresh={true}
           path="posts/:postId"
           element={<Post />}
           action={async ({ request, params }) => {
-            if (request.method === "DELETE") {
-              const formData = Object.fromEntries(await request.formData());
-              console.log(formData);
+            const formData = Object.fromEntries(await request.formData());
+            console.log(formData);
+            if (
+              request.method === "DELETE" &&
+              Object.keys(formData).length === 0
+            ) {
+              const deletePost = await app.delete(
+                `/me/posts/${params.postId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+              return redirect("/dashboard");
+            }
+
+            if (request.method === "DELETE" && "comment_id" in formData) {
               try {
                 const deleteComment = await app.delete(
                   `/comments/${formData.comment_id}`,
-                  {},
+
                   {
                     headers: {
                       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -106,13 +122,11 @@ const router = createBrowserRouter(
               }
             }
             if (request.method === "POST") {
-              const data = Object.fromEntries(await request.formData());
-
               try {
                 // needs validation need to check if login is successful
                 const res = await app.post(
                   `/posts/${params.postId}/comments`,
-                  data,
+                  formData,
                   {
                     headers: {
                       Authorization: `Bearer ${localStorage.getItem("token")}`,

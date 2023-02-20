@@ -40,7 +40,7 @@ collectionsRouter.get("/collections/:collectionId", auth, async (req, res) => {
   }
 });
 
-// Get login user's own collection ----- NOT WORKING
+// Get login user's own collection ----- WORKING
 collectionsRouter.get("/me/collections", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;

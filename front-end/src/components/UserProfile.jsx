@@ -11,7 +11,6 @@ export const UserProfile = () => {
   console.log(profile);
 
   let error = useRouteError();
-
   if (typeof profile === "undefined") {
     return <div>loading...</div>;
   }
