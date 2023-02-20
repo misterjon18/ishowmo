@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useLoaderData, useFetcher, useNavigate } from "react-router-dom";
 import { PRIMARY_COLOR } from "../constants";
 import "../styles/Dashboard.css";
 import { useRef } from "react";
@@ -7,6 +7,11 @@ import app from "../../lib/axios-config";
 const Dashboard = () => {
   const posts = useLoaderData();
   const fileInput = useRef(null);
+  // const fetcher = useFetcher();
+  const navigate = useNavigate();
+  const refreshPage = () => {
+    navigate(0);
+  };
 
   return (
     <>
@@ -29,6 +34,8 @@ const Dashboard = () => {
                     "Content-Type": "multipart/form-data",
                   },
                 });
+                // fetcher.load("/dashboard");
+                refreshPage();
               }}
               onClick={(event) => {
                 event.currentTarget.value = "";
@@ -48,7 +55,7 @@ const Dashboard = () => {
         <div className="row">
           {posts.map((post) => {
             return (
-              <div className="col-4">
+              <div className="col-4" key={post.post_id}>
                 {/* use Link if your using internal links  */}
                 {/* only use a href for outside links e.g. facebook */}
                 <Link to={`/posts/${post.post_id}`}>
