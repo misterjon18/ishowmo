@@ -9,11 +9,21 @@ export default function Post() {
   return (
     <>
       <div className="container">
-        <Form method="delete">
-          <button type="submit" className="btn">
-            Delete Post
-          </button>
-        </Form>
+        {/* START */}
+        {localStorage.getItem("collector_id") == post.collector_id && (
+          <Form method="delete">
+            <input
+              name="post_id"
+              type="text"
+              style={{ display: "none" }}
+              value={post.post_id}
+            />
+            <button type="submit" className="btn">
+              Delete Post
+            </button>
+          </Form>
+        )}
+        {/* // END */}
         <div className="row">
           <div className="col-6 my-5 ">
             <img src={"/" + post.source} style={{ width: "100%" }} />
