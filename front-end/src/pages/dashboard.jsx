@@ -35,7 +35,8 @@ const Dashboard = () => {
                   },
                 });
                 // fetcher.load("/dashboard");
-                refreshPage();
+                location.reload();
+                // refreshPage();
               }}
               onClick={(event) => {
                 event.currentTarget.value = "";

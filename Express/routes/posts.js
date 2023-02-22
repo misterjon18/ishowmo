@@ -43,12 +43,22 @@ postsRouter.get("/posts/:postId", auth, async (req, res) => {
     const { collector_id } = req.collector;
     const postId = req.params.postId;
 
-    console.log("WORKING !!!!!");
-    const posts = await pool.query(
-      "SELECT * FROM public.posts WHERE post_id = $1",
-      [postId]
-    );
-    res.status(200).json({ post: posts.rows[0] });
+    const [postLikes, posts, likePost] = await Promise.all([
+      pool.query("SELECT COUNT(*) FROM post_likes WHERE post_id = $1", [
+        postId,
+      ]),
+      pool.query("SELECT * FROM public.posts WHERE post_id = $1", [postId]),
+      pool.query(
+        "SELECT post_like_id FROM public.post_likes WHERE collector_id = $1 AND post_id = $2",
+        [collector_id, postId]
+      ),
+    ]);
+
+    res.status(200).json({
+      post: posts.rows[0],
+      likeCount: Number(postLikes.rows[0].count), //counts the total number of likes
+      likePost: likePost.rowCount != 0,
+    });
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error fetching posts" });

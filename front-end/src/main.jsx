@@ -83,7 +83,29 @@ const router = createBrowserRouter(
 
         {/* postId*/}
         <Route
-          forceRefresh={true}
+          path="/posts/:postId/like"
+          action={async ({ request, params }) => {
+            if (request.method === "DELETE") {
+              await app.delete(`/posts/${params.postId}/likes`, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              });
+            } else if (request.method === "POST") {
+              await app.post(
+                `/posts/${params.postId}/likes`,
+                {},
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+            }
+            return redirect(`/posts/${params.postId}`);
+          }}
+        ></Route>
+        <Route
           path="posts/:postId"
           element={<Post />}
           action={async ({ request, params }) => {
@@ -162,7 +184,12 @@ const router = createBrowserRouter(
                 }
               );
               console.log(result2);
-              return [result.data.post, result2.data];
+              return [
+                result.data.post,
+                result2.data,
+                result.data.likeCount,
+                result.data.likePost,
+              ];
             } catch (err) {
               console.log(err);
               throw err;

@@ -1,10 +1,11 @@
-import { useLoaderData, Form } from "react-router-dom";
+import { useLoaderData, Form, useParams } from "react-router-dom";
 import { formatDistanceToNowStrict } from "date-fns";
 import { PRIMARY_COLOR } from "../constants";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 export default function Post() {
-  const [post, comments] = useLoaderData();
+  const [post, comments, likeCount, likePost] = useLoaderData();
+  let { postId } = useParams();
 
   return (
     <>
@@ -27,6 +28,17 @@ export default function Post() {
         <div className="row">
           <div className="col-6 my-5 ">
             <img src={"/" + post.source} style={{ width: "100%" }} />
+            <Form
+              method={likePost ? "delete" : "post"}
+              action={`/posts/${postId}/like`}
+            >
+              <button type="submit" className="link-muted me-2">
+                <ThumbUpOffAltIcon
+                  style={{ color: likePost ? "red" : "initial" }}
+                />
+                {likeCount}
+              </button>
+            </Form>
           </div>
 
           {/* EDIT */}
@@ -78,12 +90,7 @@ export default function Post() {
                                 <p>{comment.comment}</p>
 
                                 <div className="d-flex justify-content-between align-items-center">
-                                  <div className="d-flex align-items-center">
-                                    <a href="#!" className="link-muted me-2">
-                                      <ThumbUpOffAltIcon />
-                                      1000
-                                    </a>
-                                  </div>
+                                  <div className="d-flex align-items-center"></div>
                                   {localStorage.getItem("collector_id") ==
                                     comment.collector_id && (
                                     <Form method="delete">
