@@ -19,6 +19,40 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// GET OWN POINTS --- WORKING
+router.get("/my-points", auth, async (req, res) => {
+  try {
+    const { collector_id } = req.collector;
+    const result = await pool.query(
+      `SELECT COALESCE(SUM(a.comment_count) + pl.like_count, 0) AS points
+    FROM collector c
+    LEFT JOIN (
+      SELECT    LEAST(COUNT(comment_id) * 2, 10) AS comment_count
+                , collector_id
+      FROM      comments 
+      WHERE     collector_id = $1
+      GROUP BY  Date(created_at), collector_id
+    ) a ON c.collector_id = a.collector_id
+    LEFT JOIN (
+      SELECT    COUNT(post_like_id) * 3 AS like_count
+                , collector_id
+      FROM      post_likes pl
+      WHERE     collector_id = $1
+      GROUP BY  collector_id
+    ) pl ON pl.collector_id = pl.collector_id
+    WHERE       c.collector_id = $1
+    GROUP BY    pl.like_count`,
+      [collector_id]
+    );
+    res.status(200).json({ points: Number(result.rows[0].points) });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send({
+      msg: "Unauthenticated",
+    });
+  }
+});
+
 router.post("/send-email", async (req, res) => {
   try {
     // Check if email is existing
