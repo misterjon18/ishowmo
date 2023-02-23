@@ -200,6 +200,21 @@ const router = createBrowserRouter(
         <Route
           path="collectors/:collectorId"
           element={<Collection />}
+          action={async ({ request }) => {
+            const data = Object.fromEntries(await request.formData());
+            try {
+              const user = localStorage.getItem("collector_id");
+              await app.post(`/unlocked-collections`, data, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              });
+            } catch (err) {
+              console.log(err);
+              throw err.response.data;
+            }
+            return null;
+          }}
           loader={async ({ params }) => {
             try {
               const result = await app.get(

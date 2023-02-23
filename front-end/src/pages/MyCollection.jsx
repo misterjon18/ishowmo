@@ -14,6 +14,9 @@ export const MyCollection = () => {
                   <div className="card-body">
                     <h5 className="card-title">{collection.name}</h5>
                     <p className="card-text">{collection.type}</p>
+                    {collection.type === "private" && (
+                      <button>Unlock Collection</button>
+                    )}
                   </div>
                 </div>
               </div>

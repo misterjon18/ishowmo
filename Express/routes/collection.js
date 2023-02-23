@@ -12,7 +12,15 @@ collectionsRouter.get(
     try {
       const collectorId = req.params.collectorId;
       const users = await pool.query(
-        `SELECT * FROM collection WHERE collector_id = $1`,
+        `SELECT    cl.*
+            , case 
+            WHEN cl.type = 'public' THEN TRUE
+            ELSE uc.unlocked_collection_ID IS NOT NULL 
+            end AS has_unlocked
+            FROM      collection cl
+            LEFT JOIN unlocked_collections uc
+            ON  cl.collection_id = uc.collection_id
+            WHERE  cl.collector_id = $1;`,
         [collectorId]
       );
       res.json(users.rows);

@@ -11,6 +11,7 @@ import router from "./routes/users.js";
 import collectionsRouter from "./routes/collection.js";
 import commentsRouter from "./routes/comments.js";
 import postsRouter from "./routes/posts.js";
+import unlockedCollectionsRouter from "./routes/unlockedCollections.js";
 const pool = connectDatabase();
 const app = express();
 const PORT = 8000;
@@ -36,6 +37,8 @@ pool.connect((err) => {
     });
   }
 });
+
+app.use("/", unlockedCollectionsRouter);
 app.use("/", postLikesRouter);
 app.use("/", router);
 app.use("/", collectionsRouter);
