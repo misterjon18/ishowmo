@@ -86,19 +86,19 @@ collectionsRouter.post(
 
   async (req, res) => {
     try {
-      console.log("COLLECTIONS");
       const { collector_id } = req.collector;
 
-      const { name, type } = req.body;
-
+      const { name, type, required_points } = req.body;
+      const typeLowercase = type.toLowerCase();
+      const points = typeLowercase === "public" ? 0 : required_points;
       const newCollection = await pool.query(
         `
       INSERT INTO collection
-      (collector_id, type, name)
+      (collector_id, type, name, required_points)
       VALUES 
-      ($1, $2, $3) RETURNING *
+      ($1, $2, $3, $4) RETURNING *
       `,
-        [collector_id, type.toLowerCase(), name]
+        [collector_id, type.toLowerCase(), name, points]
       );
       res.json(newCollection.rows);
     } catch (error) {
