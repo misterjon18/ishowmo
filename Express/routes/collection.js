@@ -10,18 +10,20 @@ collectionsRouter.get(
   auth,
   async (req, res) => {
     try {
+      const { collector_id: authCollectorId } = req.collector;
       const collectorId = req.params.collectorId;
       const users = await pool.query(
         `SELECT    cl.*
-            , case 
+        , CASE 
             WHEN cl.type = 'public' THEN TRUE
+            WHEN uc.unlocked_collection_ID IS NULL THEN FALSE
             ELSE uc.unlocked_collection_ID IS NOT NULL 
-            end AS has_unlocked
-            FROM      collection cl
-            LEFT JOIN unlocked_collections uc
-            ON  cl.collection_id = uc.collection_id
-            WHERE  cl.collector_id = $1;`,
-        [collectorId]
+          END AS has_unlocked 
+FROM      collection cl
+LEFT JOIN unlocked_collections uc
+ON        cl.collection_id = uc.collection_id AND uc.collector_id = $1
+WHERE     cl.collector_id = $2;`,
+        [authCollectorId, collectorId]
       );
       res.json(users.rows);
     } catch (error) {

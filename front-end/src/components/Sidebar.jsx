@@ -44,7 +44,7 @@ function Sidebar() {
       <div className="Sidebar-main">
         <img id="brandLogo" src="/src/assets/capstoner.png" />
         <ul className="SidebarList">
-          <div> Your Points :{points} </div>
+          <div style={{ color: "white" }}> Your Points :{points} </div>
           {SidebarData.map((val, key) => {
             return (
               <NavLink key={key} to={val.link}>

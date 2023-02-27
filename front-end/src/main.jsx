@@ -198,10 +198,11 @@ const router = createBrowserRouter(
         ></Route>
         {/* Collections */}
         <Route
-          path="collectors/:collectorId"
-          element={<Collection />}
-          action={async ({ request }) => {
+          path="/collectors/:collectorId/unlocked"
+          // element={<Collection />}
+          action={async ({ request, params }) => {
             const data = Object.fromEntries(await request.formData());
+
             try {
               const user = localStorage.getItem("collector_id");
               await app.post(`/unlocked-collections`, data, {
@@ -213,8 +214,12 @@ const router = createBrowserRouter(
               console.log(err);
               throw err.response.data;
             }
-            return null;
+            return redirect(`/collectors/${params.collectorId}`);
           }}
+        ></Route>
+        <Route
+          path="/collectors/:collectorId/"
+          element={<Collection />}
           loader={async ({ params }) => {
             try {
               const result = await app.get(

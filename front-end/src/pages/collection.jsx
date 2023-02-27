@@ -1,7 +1,8 @@
-import { useLoaderData, Form } from "react-router-dom";
+import { useLoaderData, Form, useParams } from "react-router-dom";
 
 const Collection = () => {
   const collections = useLoaderData();
+  const params = useParams();
 
   return (
     <>
@@ -14,7 +15,10 @@ const Collection = () => {
                   <div className="card-body">
                     <h5 className="card-title">{collection.name}</h5>
                     <p className="card-text">{collection.type}</p>
-                    <Form method="POST">
+                    <Form
+                      method="POST"
+                      action={`/collectors/${params.collectorId}/unlocked`}
+                    >
                       {/* HACKABLE */}
                       <input
                         name="paid_points"
