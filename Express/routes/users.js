@@ -88,9 +88,14 @@ router.post("/send-email", async (req, res) => {
     console.log(error);
   }
 });
-router.get("/userlist", async (req, res) => {
+router.get("/userlist", auth, async (req, res) => {
   try {
-    const users = await pool.query("SELECT * FROM collector");
+    const { collector_id } = req.collector;
+    console.log(collector_id);
+    const users = await pool.query(
+      `SELECT * FROM collector WHERE collector_id != $1`,
+      [collector_id]
+    );
     res.json(users.rows);
   } catch (error) {
     console.log(error);

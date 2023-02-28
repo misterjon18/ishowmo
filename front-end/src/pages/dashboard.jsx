@@ -7,7 +7,6 @@ import app from "../../lib/axios-config";
 const Dashboard = () => {
   const posts = useLoaderData();
   const fileInput = useRef(null);
-
   const navigate = useNavigate();
   const refreshPage = () => {
     navigate(0);

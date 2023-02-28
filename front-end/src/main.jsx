@@ -36,7 +36,11 @@ const router = createBrowserRouter(
           element={<UserList />}
           loader={async () => {
             try {
-              const result = await app.get("/userlist");
+              const result = await app.get("/userlist", {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              });
 
               return result.data;
             } catch (err) {
@@ -215,7 +219,7 @@ const router = createBrowserRouter(
                 }
               );
 
-              return result.data;
+              return result.data.posts;
             } catch (err) {
               console.log(err);
               throw err;

@@ -14,7 +14,7 @@ postsRouter.get("/posts", auth, async (req, res) => {
     const posts = await pool.query(
       "SELECT * FROM posts ORDER BY created_at DESC"
     );
-    console.log(posts);
+
     res.status(200).json({ posts: posts.rows });
   } catch (error) {
     console.error(error);
