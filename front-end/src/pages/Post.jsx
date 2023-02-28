@@ -30,13 +30,16 @@ export default function Post() {
         )}
 
         <div className="row">
-          <div className="col-6 my-5 ">
-            <img src={"/" + post.source} style={{ width: "100%" }} />
+          <div className="col-6 my-5" style={{ paddingLeft: "40px" }}>
+            <img
+              src={"/" + post.source}
+              style={{ width: "90%", height: "90%", borderRadius: "10px" }}
+            />
             <Form
               method={likePost ? "delete" : "post"}
               action={`/posts/${postId}/like`}
             >
-              <button type="submit" className="link-muted me-2">
+              <button type="submit" className="link-muted me-2" id="btn-thumb">
                 <ThumbUpOffAltIcon
                   style={{ color: likePost ? "red" : "initial" }}
                 />
@@ -48,13 +51,16 @@ export default function Post() {
           {/* EDIT */}
           <div className="col-6">
             <div
-              className="container my-5 py-5 text-dark"
+              className="container my-5 py-4 text-dark"
               style={{ backgroundColor: "#f0f2f5", marginLeft: "auto" }}
             >
               <div className="row d-flex justify-content-center">
                 <div
                   className="col-md-11 col-lg-9 col-xl-7"
-                  style={{ backgroundColor: PRIMARY_COLOR }}
+                  style={{
+                    backgroundColor: PRIMARY_COLOR,
+                    borderRadius: "10px",
+                  }}
                 >
                   <Form method="post">
                     <div className="my-2">

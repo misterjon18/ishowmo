@@ -5,6 +5,7 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
+import "../styles/Collection.css";
 
 const Collection = () => {
   const collections = useLoaderData();
@@ -18,18 +19,20 @@ const Collection = () => {
           {collections.map((collection) => {
             return (
               <div key={collection.id} className="col-3">
-                <div className="card" style={{ width: "100%" }}>
+                <div className="card">
                   <div className="">
-                    <button
-                      disabled={!collection.has_unlocked}
-                      style={{ marginTop: "10px", marginBottom: "10px" }}
-                      className="btn btn-outline-primary"
-                      onClick={() => {
-                        navigate(`/collections/${collection.collection_id}`);
-                      }}
-                    >
-                      View
-                    </button>
+                    <span id="btn-container">
+                      <button
+                        disabled={!collection.has_unlocked}
+                        style={{ marginTop: "10px", marginBottom: "10px" }}
+                        className="btn btn-outline-primary btn-sm"
+                        onClick={() => {
+                          navigate(`/collections/${collection.collection_id}`);
+                        }}
+                      >
+                        View
+                      </button>
+                    </span>
 
                     <h5 className="card-title" style={{ color: "blue" }}>
                       {collection.name}

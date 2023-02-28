@@ -4,7 +4,7 @@ import {
   redirect,
   useNavigate,
 } from "react-router-dom";
-
+import "../styles/MyCollection.css";
 export const MyCollection = () => {
   const myCollections = useLoaderData();
   const navigate = useNavigate();
@@ -18,7 +18,11 @@ export const MyCollection = () => {
         <button
           className="btn-primary btn"
           onClick={addCollection}
-          style={{ marginBottom: "15px", marginTop: "15px" }}
+          style={{
+            marginBottom: "15px",
+            marginTop: "15px",
+            marginLeft: "30px",
+          }}
         >
           Add Collection
         </button>
@@ -26,22 +30,21 @@ export const MyCollection = () => {
           {myCollections.collections.map((collection) => {
             return (
               <div key={collection.id} className="col-3">
-                <div className="card" style={{ width: "100%" }}>
-                  <button
-                    style={{ marginTop: "10px", marginBottom: "10px" }}
-                    className="btn btn-outline-primary"
-                    onClick={() => {
-                      navigate(`/collections/${collection.collection_id}`);
-                    }}
-                  >
-                    View
-                  </button>
-                  <div className="card-body">
+                <div className="card" id="card">
+                  <span id="btn-container">
+                    <button
+                      id="btn"
+                      className="btn btn-outline-primary btn-sm"
+                      onClick={() => {
+                        navigate(`/collections/${collection.collection_id}`);
+                      }}
+                    >
+                      View
+                    </button>
+                  </span>
+                  <div className="card-body" style={{ textAlign: "center" }}>
                     <h5 className="card-title">{collection.name}</h5>
                     <p className="card-text">{collection.type}</p>
-                    {/* {collection.type === "private" && (
-                      <button>Unlock Collection</button>
-                    )} */}
                   </div>
                 </div>
               </div>

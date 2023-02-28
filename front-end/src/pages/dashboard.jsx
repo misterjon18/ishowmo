@@ -16,7 +16,7 @@ const Dashboard = () => {
     <>
       <div className="container">
         {/* Add Button */}
-        <div className="row ">
+        <div className="row">
           <div className="col-2 offset-10">
             <input
               type="file"
@@ -33,7 +33,6 @@ const Dashboard = () => {
                     "Content-Type": "multipart/form-data",
                   },
                 });
-                // fetcher.load("/dashboard");
                 // location.reload();
                 refreshPage();
               }}

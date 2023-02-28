@@ -7,10 +7,10 @@ export default function SeeUnlockedCollection() {
 
   return (
     <>
-      <div className="container" style={{ textAlign: "center" }}>
+      <div className="container row" style={{ textAlign: "center" }}>
         {posts.map((post) => {
           return (
-            <div key={post.post_id} className="col-3 card card-body See-Unlock">
+            <div key={post.post_id} className="col-3 See-Unlock">
               <Link to={`/posts/${post.post_id}`}>
                 <img
                   className="unlock-img"

@@ -1,9 +1,21 @@
 .See-Unlock {
-  background-color: gold;
-  margin: 20px 20px;
+  border-radius: 10px;
+  border: solid 5px #023e8a;
+  margin: 30px 10px;
+  /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
 }
 
 .unlock-img {
   width: 200px;
   height: 200px;
+
+  padding: 20px 0px;
+}
+
+.row {
+  transition: transform 0.2s ease-in-out;
+}
+
+.unlock-img:hover {
+  transform: scale(1.05);
 }
