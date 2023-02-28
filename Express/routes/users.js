@@ -1,15 +1,15 @@
 import express from "express";
-const router = express.Router();
 import { connectDatabase } from "../pool.js";
 import bcrypt from "bcryptjs";
 import { generateJwt } from "../jwt/jwtGenerator.js";
 import { auth } from "../middleware/auth.js";
 import multer from "multer";
-const upload = multer({ dest: "uploads/" });
-const pool = connectDatabase();
 import crypto from "crypto";
 import nodemailer from "nodemailer";
 import getUserPoints from "../points/getUserPoints.js";
+const upload = multer({ dest: "uploads/" });
+const pool = connectDatabase();
+const router = express.Router();
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,

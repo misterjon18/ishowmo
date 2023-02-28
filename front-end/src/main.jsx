@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import { Login } from "./pages/login";
 import { SignUp } from "./pages/sign-up";
+import AddCollection from "./pages/AddCollection";
 // -------->
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";
@@ -21,6 +22,8 @@ import { UserList } from "./components/UserList";
 import { UserProfile } from "./components/UserProfile";
 import Post from "./pages/Post";
 import { MyCollection } from "./pages/MyCollection";
+import SeeUnlockedCollection from "./pages/SeeUnlockedCollection";
+// ---------
 
 // Add CSS
 
@@ -106,11 +109,11 @@ const router = createBrowserRouter(
           }}
         ></Route>
         <Route
-          path="posts/:postId"
+          path="/posts/:postId"
           element={<Post />}
           action={async ({ request, params }) => {
             const formData = Object.fromEntries(await request.formData());
-            console.log(formData);
+
             if (
               request.method === "DELETE" &&
               Object.keys(formData).length === 0
@@ -196,6 +199,29 @@ const router = createBrowserRouter(
             }
           }}
         ></Route>
+        {/* See Unlocked Collections */}
+        <Route
+          path="/collections/:collectionId"
+          element={<SeeUnlockedCollection />}
+          loader={async ({ request, params }) => {
+            try {
+              const result = await app.get(
+                `/collection-items/${params.collectionId}`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+
+              return result.data;
+            } catch (err) {
+              console.log(err);
+              throw err;
+            }
+          }}
+        ></Route>
         {/* Collections */}
         <Route
           path="/collectors/:collectorId/unlocked"
@@ -239,6 +265,27 @@ const router = createBrowserRouter(
             }
           }}
         ></Route>
+        {/* Add Collection */}
+        <Route
+          path="/add-collection"
+          element={<AddCollection />}
+          action={async ({ request }) => {
+            const data = Object.fromEntries(await request.formData());
+            try {
+              const result = await app.post("/collections", data, {
+                headers: {
+                  Authorization: `Bearer ${localStorage.getItem("token")}`,
+                },
+              });
+
+              return result.data;
+            } catch (err) {
+              console.log(err);
+              throw err.response.data;
+            }
+          }}
+        />
+
         {/*See Own Collection */}
         <Route
           path="/me/collections"
@@ -277,7 +324,6 @@ const router = createBrowserRouter(
                   },
                 }
               );
-              console.log(result);
 
               return result.data.posts; // Expects object from backend
             } catch (err) {
@@ -289,7 +335,7 @@ const router = createBrowserRouter(
         <Route path="dashboard" element={<Dashboard />} />
       </Route>
       <Route
-        path="forgot-password"
+        path="/forgot-password"
         element={<ForgotPassword />}
         action={async ({ request }) => {
           const data = Object.fromEntries(await request.formData());

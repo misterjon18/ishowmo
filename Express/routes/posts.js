@@ -14,6 +14,7 @@ postsRouter.get("/posts", auth, async (req, res) => {
     const posts = await pool.query(
       "SELECT * FROM posts ORDER BY created_at DESC"
     );
+    console.log(posts);
     res.status(200).json({ posts: posts.rows });
   } catch (error) {
     console.error(error);
@@ -24,8 +25,7 @@ postsRouter.get("/posts", auth, async (req, res) => {
 postsRouter.get("/me/posts", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    console.log(collector_id);
-    console.log("WORKING !!!!!");
+
     const posts = await pool.query(
       "SELECT * FROM public.posts WHERE collector_id = $1",
       [collector_id]
@@ -34,6 +34,21 @@ postsRouter.get("/me/posts", auth, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Error fetching posts" });
+  }
+});
+// // GET COLLECTION BY COLLECTION ID ----- WORKING
+postsRouter.get("/collection-items/:collectionId", auth, async (req, res) => {
+  try {
+    const collectionId = req.params.collectionId;
+
+    const posts = await pool.query(
+      "SELECT * FROM public.posts WHERE collection_id = $1",
+      [collectionId]
+    );
+    res.status(200).json({ posts: posts.rows });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Error fetching collection" });
   }
 });
 
@@ -70,7 +85,7 @@ postsRouter.get("/posts/:postId", auth, async (req, res) => {
 postsRouter.post("/posts", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    console.log(req.body);
+
     const collection_id = req.body.collection_id;
     const source = req.files.source;
     // const uploadPath = process.cwd() + "/uploads/" + source.name;

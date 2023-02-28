@@ -7,7 +7,7 @@ import app from "../../lib/axios-config";
 const Dashboard = () => {
   const posts = useLoaderData();
   const fileInput = useRef(null);
-  // const fetcher = useFetcher();
+
   const navigate = useNavigate();
   const refreshPage = () => {
     navigate(0);
@@ -47,7 +47,12 @@ const Dashboard = () => {
                 fileInput?.current?.click();
               }}
               className="btn"
-              style={{ backgroundColor: PRIMARY_COLOR, color: "whitesmoke" }}
+              style={{
+                backgroundColor: PRIMARY_COLOR,
+                color: "whitesmoke",
+                marginTop: "15px",
+                marginBottom: "15px",
+              }}
             >
               Add Post
             </button>

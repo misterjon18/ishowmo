@@ -1,11 +1,21 @@
-import { useLoaderData } from "react-router-dom";
+import {
+  NavLink,
+  useLoaderData,
+  redirect,
+  useNavigate,
+} from "react-router-dom";
 
 export const MyCollection = () => {
   const myCollections = useLoaderData();
+  const navigate = useNavigate();
+  function addCollection() {
+    navigate("/add-collection");
+  }
 
   return (
     <>
       <div className="container mt-2">
+        <button onClick={addCollection}>Add Collection</button>
         <div className="row">
           {myCollections.collections.map((collection) => {
             return (

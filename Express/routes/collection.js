@@ -18,11 +18,11 @@ collectionsRouter.get(
             WHEN cl.type = 'public' THEN TRUE
             WHEN uc.unlocked_collection_ID IS NULL THEN FALSE
             ELSE uc.unlocked_collection_ID IS NOT NULL 
-          END AS has_unlocked 
-FROM      collection cl
-LEFT JOIN unlocked_collections uc
-ON        cl.collection_id = uc.collection_id AND uc.collector_id = $1
-WHERE     cl.collector_id = $2;`,
+            END AS has_unlocked 
+            FROM collection cl
+            LEFT JOIN unlocked_collections uc
+            ON cl.collection_id = uc.collection_id AND uc.collector_id = $1
+            WHERE cl.collector_id = $2;`,
         [authCollectorId, collectorId]
       );
       res.json(users.rows);
