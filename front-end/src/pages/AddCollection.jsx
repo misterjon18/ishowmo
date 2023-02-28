@@ -22,7 +22,7 @@ export default function AddCollection() {
             </div>
           </div>
           <div class="mb-3 row">
-            <label for="inputPassword" class="col-sm-2 col-form-label">
+            <label for="inputType" class="col-sm-2 col-form-label">
               Type
             </label>
             <div class="col-sm-10">
@@ -48,7 +48,7 @@ export default function AddCollection() {
           </button>
         </div>
       </Form>
-      <ToastContainer></ToastContainer>
+      {/* <ToastContainer></ToastContainer> */}
     </>
   );
 }

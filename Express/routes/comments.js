@@ -52,7 +52,7 @@ commentsRouter.patch("/comments/:comment_id", auth, async (req, res) => {
     WHERE collector_id =$2 AND comment_id = $3 RETURNING *`,
       [comment, collector_id, comment_id]
     );
-    console.log(req.collector);
+
     res.json(newComment.rows);
   } catch (error) {
     console.log(error.message);

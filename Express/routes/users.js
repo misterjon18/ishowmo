@@ -52,7 +52,6 @@ router.post("/send-email", async (req, res) => {
       .toString("hex")
       .slice(0, 10);
 
-    console.log(newPassword);
     // Converting password to bcrypt
 
     const saltRound = 10;
@@ -91,7 +90,7 @@ router.post("/send-email", async (req, res) => {
 router.get("/userlist", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
-    console.log(collector_id);
+
     const users = await pool.query(
       `SELECT * FROM collector WHERE collector_id != $1`,
       [collector_id]

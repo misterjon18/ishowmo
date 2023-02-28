@@ -15,8 +15,7 @@ unlockedCollectionsRouter.post(
       const { collector_id } = req.collector;
       const { paid_points, collection_id } = req.body;
       const points = await getUserPoints(collector_id);
-      console.log(paid_points);
-      console.log(points);
+
       if (points >= paid_points) {
         const unlockedCollections = await pool.query(
           `INSERT INTO public.unlocked_collections (paid_points, collection_id ,collector_id)
@@ -33,7 +32,5 @@ unlockedCollectionsRouter.post(
     }
   }
 );
-
-// GET THE UNLOCK
 
 export default unlockedCollectionsRouter;

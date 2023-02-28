@@ -106,9 +106,6 @@ postsRouter.post("/posts", auth, async (req, res) => {
     );
     const uploadPath = path.join(process.cwd(), publicPath);
 
-    console.log(source);
-    console.log(uploadPath);
-
     const err = await source.mv(uploadPath);
     if (err) {
       return res.status(500).send(err);

@@ -46,7 +46,7 @@ function Sidebar() {
         <ul className="SidebarList">
           <div style={{ color: "white", padding: "10px" }}>
             {" "}
-            Your Points :{points}{" "}
+            Your Points : {points}{" "}
           </div>
           {SidebarData.map((val, key) => {
             return (

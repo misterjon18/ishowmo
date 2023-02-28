@@ -25,8 +25,6 @@ import { MyCollection } from "./pages/MyCollection";
 import SeeUnlockedCollection from "./pages/SeeUnlockedCollection";
 // ---------
 
-// Add CSS
-
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<App />}>
@@ -181,7 +179,7 @@ const router = createBrowserRouter(
                   },
                 }
               );
-              const result2 = await app.get(
+              const commentResult = await app.get(
                 `/posts/${params.postId}/comments`,
                 // Pass the token and headers----------------
                 {
@@ -190,10 +188,10 @@ const router = createBrowserRouter(
                   },
                 }
               );
-              console.log(result2);
+
               return [
                 result.data.post,
-                result2.data,
+                commentResult.data,
                 result.data.likeCount,
                 result.data.likePost,
               ];
@@ -209,7 +207,7 @@ const router = createBrowserRouter(
           element={<SeeUnlockedCollection />}
           loader={async ({ request, params }) => {
             try {
-              const result = await app.get(
+              const insideCollection = await app.get(
                 `/collection-items/${params.collectionId}`,
                 // Pass the token and headers----------------
                 {
@@ -219,7 +217,33 @@ const router = createBrowserRouter(
                 }
               );
 
-              return result.data.posts;
+              // const result = await app.get(
+              //   `/posts/${params.postId}`,
+              //   // Pass the token and headers----------------
+              //   {
+              //     headers: {
+              //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+              //     },
+              //   }
+              // );
+              // const commentResult = await app.get(
+              //   `/posts/${params.postId}/comments`,
+              //   // Pass the token and headers----------------
+              //   {
+              //     headers: {
+              //       Authorization: `Bearer ${localStorage.getItem("token")}`,
+              //     },
+              //   }
+              // );
+
+              // return [
+              //   insideCollection.data.posts,
+              //   result.data.post,
+              //   commentResult.data,
+              //   result.data.likeCount,
+              //   result.data.likePost,
+              // ];
+              return insideCollection.data.posts;
             } catch (err) {
               console.log(err);
               throw err;
