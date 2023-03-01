@@ -13,12 +13,7 @@ export default function Post() {
       <div className="container">
         {localStorage.getItem("collector_id") == post.collector_id && (
           <Form method="delete">
-            <input
-              name="post_id"
-              type="text"
-              style={{ display: "none" }}
-              value={post.post_id}
-            />
+            <input name="post_id" type="hidden" value={post.post_id} readOnly />
             <button
               type="submit"
               className="btn btn-outline-primary btn-sm delete-post-btn"
@@ -106,9 +101,9 @@ export default function Post() {
                                     <Form method="delete">
                                       <input
                                         name="comment_id"
-                                        type="text"
-                                        style={{ display: "none" }}
+                                        type="hidden"
                                         value={comment.comment_id}
+                                        readOnly
                                       />
                                       <button type="submit" className="btn">
                                         <i></i>Delete
