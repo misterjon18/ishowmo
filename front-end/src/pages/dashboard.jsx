@@ -44,10 +44,8 @@ const Dashboard = () => {
               onClick={() => {
                 fileInput?.current?.click();
               }}
-              className="btn"
+              className="btn btn-outline-primary btn-sm"
               style={{
-                backgroundColor: PRIMARY_COLOR,
-                color: "whitesmoke",
                 marginTop: "15px",
                 marginBottom: "15px",
               }}

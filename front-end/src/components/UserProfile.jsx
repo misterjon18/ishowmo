@@ -5,10 +5,22 @@ import {
   Form,
 } from "react-router-dom";
 import { useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const UserProfile = () => {
   const profile = useLoaderData();
-  console.log(profile);
+
+  // const notify = toast.success("🦄 Wow so easy!", {
+  //   position: "top-right",
+  //   autoClose: 2000,
+  //   hideProgressBar: false,
+  //   closeOnClick: true,
+  //   pauseOnHover: true,
+  //   draggable: true,
+  //   progress: undefined,
+  //   theme: "light",
+  // });
 
   let error = useRouteError();
   if (typeof profile === "undefined") {
@@ -16,6 +28,18 @@ export const UserProfile = () => {
   }
   return (
     <div className="container-xl px-4 mt-4" style={{ marginLeft: 400 }}>
+      {/* <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      /> */}
       <div className="col-xl-8">
         {/* <!-- Account details card--> */}
         <div className="card mb-4">
