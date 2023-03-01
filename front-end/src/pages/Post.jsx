@@ -5,9 +5,9 @@ import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import "../styles/Post.css";
 
 export default function Post() {
-  const [post, comments, likeCount, likePost] = useLoaderData();
+  const [post, comments, likeCount, likePost, getUsername] = useLoaderData();
   let { postId } = useParams();
-
+  console.log(getUsername[0].username);
   return (
     <>
       <div className="container">
@@ -45,6 +45,7 @@ export default function Post() {
                 />
                 {likeCount}
               </button>
+              <span>Posted by: {getUsername[0].username}</span>
             </Form>
           </div>
 
@@ -63,7 +64,7 @@ export default function Post() {
                   }}
                 >
                   <Form method="post">
-                    <div className="my-2">
+                    <div className="my-4">
                       <textarea
                         className="form-control"
                         name="comment"

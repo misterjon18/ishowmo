@@ -187,12 +187,22 @@ const router = createBrowserRouter(
                   },
                 }
               );
+              const getUsername = await app.get(
+                `/userlist/${params.postId}`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
 
               return [
                 result.data.post,
                 commentResult.data,
                 result.data.likeCount,
                 result.data.likePost,
+                getUsername.data,
               ];
             } catch (err) {
               console.log(err);

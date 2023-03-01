@@ -87,6 +87,7 @@ router.post("/send-email", async (req, res) => {
     console.log(error);
   }
 });
+// GETS ALL USERS --- WORKING
 router.get("/userlist", auth, async (req, res) => {
   try {
     const { collector_id } = req.collector;
@@ -94,6 +95,24 @@ router.get("/userlist", auth, async (req, res) => {
     const users = await pool.query(
       `SELECT * FROM collector WHERE collector_id != $1`,
       [collector_id]
+    );
+    res.json(users.rows);
+  } catch (error) {
+    console.log(error);
+  }
+});
+// GET ALL USERS INCLUDING USERNAME----WORKING
+router.get("/userlist/:postId", auth, async (req, res) => {
+  try {
+    // const { collector_id } = req.collector;
+    const { postId } = req.params;
+
+    const users = await pool.query(
+      `SELECT p.collector_id, cl.username 
+      FROM public.collector cl INNER JOIN posts 
+      p ON cl.collector_id = p.collector_id
+      WHERE post_id = $1;`,
+      [postId]
     );
     res.json(users.rows);
   } catch (error) {
