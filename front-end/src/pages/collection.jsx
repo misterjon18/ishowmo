@@ -37,7 +37,9 @@ const Collection = () => {
                     <h5 className="card-title" style={{ color: "blue" }}>
                       {collection.name}
                     </h5>
-                    <p className="card-text">{collection.type}</p>
+                    <p className="card-text" style={{ color: "blue" }}>
+                      {collection.type}
+                    </p>
                     <Form
                       method="POST"
                       action={`/collectors/${params.collectorId}/unlocked`}
@@ -53,14 +55,17 @@ const Collection = () => {
                         style={{ display: "none" }}
                       />
                       {!collection.has_unlocked && (
-                        <button className="btn btn-info">
+                        <button
+                          className="btn btn-info"
+                          style={{ color: "whitesmoke" }}
+                        >
                           Unlock Collection
                         </button>
                       )}
                     </Form>
                     <div>
                       {collection.type === "private" &&
-                        collection.required_points}
+                        collection.required_points}{" "}
                     </div>
                   </div>
                 </div>

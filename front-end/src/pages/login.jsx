@@ -5,6 +5,7 @@ import React from "react";
 
 export const Login = ({ hasError }) => {
   const params = useSearchParams();
+  const notify = () => toast("Login successful !");
   return (
     <>
       <section className="vh-100">

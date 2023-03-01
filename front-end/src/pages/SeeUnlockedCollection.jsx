@@ -3,23 +3,26 @@ import { useLoaderData, Link } from "react-router-dom";
 import "../styles/SeeUnlockedCollection.css";
 
 export default function SeeUnlockedCollection() {
-  const posts = useLoaderData();
+  const { posts, collection } = useLoaderData();
 
   return (
     <>
       <div className="container row" style={{ textAlign: "center" }}>
-        <span style={{ textAlign: "end" }}>
-          <button
-            style={{
-              marginTop: "20px",
-              marginBottom: "10px",
-              marginRight: "30px",
-            }}
-            className="btn btn-outline-primary btn-sm"
-          >
-            Add Post to Collection
-          </button>
-        </span>
+        {collection.collector_id ===
+          Number(localStorage.getItem("collector_id")) && (
+          <span style={{ textAlign: "end" }}>
+            <button
+              style={{
+                marginTop: "20px",
+                marginBottom: "10px",
+                marginRight: "30px",
+              }}
+              className="btn btn-outline-primary btn-sm"
+            >
+              Add Post to Collection
+            </button>
+          </span>
+        )}
         {posts.map((post) => {
           return (
             <div key={post.post_id} className="col-3 See-Unlock">
@@ -31,12 +34,15 @@ export default function SeeUnlockedCollection() {
                   alt="posts-img"
                 />
                 <p className="card-text">{post.type} </p>
-                <button
-                  style={{ marginTop: "10px", marginBottom: "10px" }}
-                  className="btn btn-outline-primary btn-sm"
-                >
-                  Delete
-                </button>
+                {collection.collector_id ===
+                  Number(localStorage.getItem("collector_id")) && (
+                  <button
+                    style={{ marginTop: "10px", marginBottom: "10px" }}
+                    className="btn btn-outline-primary btn-sm"
+                  >
+                    Delete
+                  </button>
+                )}
               </Link>
             </div>
           );

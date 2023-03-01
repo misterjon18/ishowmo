@@ -36,12 +36,12 @@ collectionsRouter.get("/collections/:collectionId", auth, async (req, res) => {
   try {
     const collectionId = req.params.collectionId;
 
-    const users = await pool.query(
+    const collection = await pool.query(
       `SELECT * FROM collection WHERE collection_id = $1`,
       [collectionId]
     );
-    if (users.rowCount > 0) {
-      res.json(users.rows);
+    if (collection.rowCount > 0) {
+      res.json(collection.rows[0]);
     } else {
       res.status(404).send("Collection Not Found");
     }

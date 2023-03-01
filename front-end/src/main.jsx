@@ -115,7 +115,7 @@ const router = createBrowserRouter(
           element={<Post />}
           action={async ({ request, params }) => {
             const formData = Object.fromEntries(await request.formData());
-            console.log(request.method);
+
             if (request.method === "DELETE" && "comment_id" in formData) {
               try {
                 const deleteComment = await app.delete(
@@ -225,34 +225,20 @@ const router = createBrowserRouter(
                   },
                 }
               );
+              const collection = await app.get(
+                `/collections/${params.collectionId}`,
+                // Pass the token and headers----------------
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
 
-              // const result = await app.get(
-              //   `/posts/${params.postId}`,
-              //   // Pass the token and headers----------------
-              //   {
-              //     headers: {
-              //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-              //     },
-              //   }
-              // );
-              // const commentResult = await app.get(
-              //   `/posts/${params.postId}/comments`,
-              //   // Pass the token and headers----------------
-              //   {
-              //     headers: {
-              //       Authorization: `Bearer ${localStorage.getItem("token")}`,
-              //     },
-              //   }
-              // );
-
-              // return [
-              //   insideCollection.data.posts,
-              //   result.data.post,
-              //   commentResult.data,
-              //   result.data.likeCount,
-              //   result.data.likePost,
-              // ];
-              return insideCollection.data.posts;
+              return {
+                posts: insideCollection.data.posts,
+                collection: collection.data,
+              };
             } catch (err) {
               console.log(err);
               throw err;
@@ -327,6 +313,27 @@ const router = createBrowserRouter(
         <Route
           path="/me/collections"
           element={<MyCollection />}
+          // EDIT-----
+          action={async ({ request, params }) => {
+            const formData = Object.fromEntries(await request.formData());
+
+            try {
+              const deleteCollection = await app.delete(
+                `/collections/${formData.collection_id}`,
+
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+              return redirect("/dashboard");
+            } catch (error) {
+              console.log(error);
+              throw error;
+            }
+          }}
+          // EDIT-----
           loader={async () => {
             try {
               const result = await app.get(
@@ -369,7 +376,7 @@ const router = createBrowserRouter(
             }
           }}
         ></Route>
-        <Route path="dashboard" element={<Dashboard />} />
+        {/* <Route path="dashboard" element={<Dashboard />} /> */}
       </Route>
       <Route
         path="/forgot-password"
