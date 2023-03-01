@@ -65,7 +65,7 @@ const Collection = () => {
                     </Form>
                     <div>
                       {collection.type === "private" &&
-                        collection.required_points}{" "}
+                        `${collection.required_points} point(s) to unlocked`}
                     </div>
                   </div>
                 </div>
