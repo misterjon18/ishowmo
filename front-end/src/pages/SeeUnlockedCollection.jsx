@@ -1,9 +1,12 @@
-import React from "react";
-import { useLoaderData, Link } from "react-router-dom";
+import React, { useRef } from "react";
+import { useLoaderData, Link, useNavigate } from "react-router-dom";
 import "../styles/SeeUnlockedCollection.css";
+import app from "../../lib/axios-config";
 
 export default function SeeUnlockedCollection() {
   const { posts, collection } = useLoaderData();
+  const fileInput = useRef(null);
+  const navigate = useNavigate();
 
   return (
     <>
@@ -12,6 +15,10 @@ export default function SeeUnlockedCollection() {
           Number(localStorage.getItem("collector_id")) && (
           <span style={{ textAlign: "end" }}>
             <button
+              type="button"
+              onClick={() => {
+                fileInput?.current?.click();
+              }}
               style={{
                 marginTop: "20px",
                 marginBottom: "10px",
@@ -21,6 +28,30 @@ export default function SeeUnlockedCollection() {
             >
               Add Post to Collection
             </button>
+            <input
+              type="file"
+              multiple
+              ref={fileInput}
+              style={{ display: "none" }}
+              onChange={async (event) => {
+                const formData = new FormData();
+
+                const source = event.target.files[0];
+                formData.append("source", source);
+                formData.append("collection_id", collection.collection_id);
+                await app.post("/posts", formData, {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    "Content-Type": "multipart/form-data",
+                  },
+                });
+
+                navigate(0);
+              }}
+              onClick={(event) => {
+                event.currentTarget.value = "";
+              }}
+            />
           </span>
         )}
         {posts.map((post) => {
