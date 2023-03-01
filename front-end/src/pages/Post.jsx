@@ -33,7 +33,7 @@ export default function Post() {
           <div className="col-6 my-5" style={{ paddingLeft: "40px" }}>
             <img
               src={"/" + post.source}
-              style={{ width: "90%", height: "90%", borderRadius: "10px" }}
+              style={{ width: "90%", height: "400px", borderRadius: "10px" }}
             />
             <Form
               method={likePost ? "delete" : "post"}
@@ -49,14 +49,14 @@ export default function Post() {
           </div>
 
           {/* EDIT */}
-          <div className="col-6">
+          <div className="col-5">
             <div
               className="container my-5 py-4 text-dark"
               style={{ backgroundColor: "#f0f2f5", marginLeft: "auto" }}
             >
               <div className="row d-flex justify-content-center">
                 <div
-                  className="col-md-11 col-lg-9 col-xl-7"
+                  className="col-11"
                   style={{
                     backgroundColor: PRIMARY_COLOR,
                     borderRadius: "10px",

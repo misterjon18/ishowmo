@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import "bootstrap/dist/css/bootstrap.min.css";
 import app from "../lib/axios-config";
 import Dashboard from "./pages/dashboard";
 import Collection from "./pages/collection";
@@ -16,7 +17,6 @@ import { Login } from "./pages/login";
 import { SignUp } from "./pages/sign-up";
 import AddCollection from "./pages/AddCollection";
 // -------->
-import "bootstrap/dist/css/bootstrap.min.css";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { UserList } from "./components/UserList";
 import { UserProfile } from "./components/UserProfile";
@@ -115,22 +115,7 @@ const router = createBrowserRouter(
           element={<Post />}
           action={async ({ request, params }) => {
             const formData = Object.fromEntries(await request.formData());
-
-            if (
-              request.method === "DELETE" &&
-              Object.keys(formData).length === 0
-            ) {
-              const deletePost = await app.delete(
-                `/me/posts/${params.postId}`,
-                {
-                  headers: {
-                    Authorization: `Bearer ${localStorage.getItem("token")}`,
-                  },
-                }
-              );
-              return redirect("/dashboard");
-            }
-
+            console.log(request.method);
             if (request.method === "DELETE" && "comment_id" in formData) {
               try {
                 const deleteComment = await app.delete(
@@ -147,7 +132,21 @@ const router = createBrowserRouter(
                 console.log(error);
                 throw error;
               }
+            } else if (
+              request.method === "DELETE" &&
+              Object.keys(formData).length != 0
+            ) {
+              const deletePost = await app.delete(
+                `/me/posts/${params.postId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`,
+                  },
+                }
+              );
+              return redirect("/dashboard");
             }
+
             if (request.method === "POST") {
               try {
                 // needs validation need to check if login is successful

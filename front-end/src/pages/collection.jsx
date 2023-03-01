@@ -15,7 +15,7 @@ const Collection = () => {
   return (
     <>
       <div className="container mt-2">
-        <div className="row" style={{ textAlign: "center" }}>
+        <div className="row" style={{ textAlign: "center", marginTop: "30px" }}>
           {collections.map((collection) => {
             return (
               <div key={collection.id} className="col-3">
