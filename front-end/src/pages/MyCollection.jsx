@@ -1,5 +1,6 @@
 import {
   NavLink,
+  Form,
   useLoaderData,
   redirect,
   useNavigate,
@@ -41,15 +42,20 @@ export const MyCollection = () => {
                     >
                       View
                     </button>
-                    <button
-                      id="btn"
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={() => {
-                        navigate(`/collections/${collection.collection_id}`);
-                      }}
-                    >
-                      Delete
-                    </button>
+                    <Form method="delete">
+                      <button
+                        type="submit"
+                        id="btn"
+                        className="btn btn-outline-primary btn-sm"
+                      >
+                        Delete
+                      </button>
+                      <input
+                        type="hidden"
+                        name="collection_id"
+                        value={collection.collection_id}
+                      />
+                    </Form>
                   </span>
                   <div
                     className="card-body"
