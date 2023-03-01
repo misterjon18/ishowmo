@@ -7,7 +7,7 @@ import "../styles/Post.css";
 export default function Post() {
   const [post, comments, likeCount, likePost, getUsername] = useLoaderData();
   let { postId } = useParams();
-  console.log(getUsername[0].username);
+
   return (
     <>
       <div className="container">
@@ -21,8 +21,7 @@ export default function Post() {
             />
             <button
               type="submit"
-              className="btn delete-post-btn"
-              style={{ backgroundColor: PRIMARY_COLOR }}
+              className="btn btn-outline-primary btn-sm delete-post-btn"
             >
               Delete Post
             </button>
@@ -45,7 +44,7 @@ export default function Post() {
                 />
                 {likeCount}
               </button>
-              <span>Posted by: {getUsername[0].username}</span>
+              <span>Posted by : {getUsername[0].username}</span>
             </Form>
           </div>
 

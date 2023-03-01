@@ -16,7 +16,7 @@ export const MyCollection = () => {
     <>
       <div className="container mt-2">
         <button
-          className="btn-primary btn"
+          className="btn btn-outline-primary btn-sm"
           onClick={addCollection}
           style={{
             marginBottom: "15px",
@@ -41,8 +41,20 @@ export const MyCollection = () => {
                     >
                       View
                     </button>
+                    <button
+                      id="btn"
+                      className="btn btn-outline-primary btn-sm"
+                      onClick={() => {
+                        navigate(`/collections/${collection.collection_id}`);
+                      }}
+                    >
+                      Delete
+                    </button>
                   </span>
-                  <div className="card-body" style={{ textAlign: "center" }}>
+                  <div
+                    className="card-body"
+                    style={{ textAlign: "center", color: "blue" }}
+                  >
                     <h5 className="card-title">{collection.name}</h5>
                     <p className="card-text">{collection.type}</p>
                   </div>
