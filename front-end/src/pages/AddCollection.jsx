@@ -1,54 +1,66 @@
-import React from "react";
+import { React, useState } from "react";
 import { ToastContainer } from "react-bootstrap";
 import { Form } from "react-router-dom";
+import "../styles/AddCollection.css";
 
 export default function AddCollection() {
+  let [val, setVal] = useState("");
+  // let [disabler, setDisabler] = useState(false);
+
+  const changeVal = (e) => {
+    setVal(e.target.value);
+    // setDisabler(!disabler);
+  };
+
   return (
     <>
       <Form method="post">
-        <div className="container" style={{ backgroundColor: "green" }}>
-          <div className="mb-3 my-5 row">
-            <label for="inputType" className="col-sm-2 col-form-label">
-              Name
-            </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="type"
-                name="name"
-              />
-            </div>
-          </div>
-
-          <div className="mb-3 row">
-            <label for="inputType" className="col-sm-2 col-form-label">
+        <div className="container container-add-collection">
+          <div className="mb-3 form-group-sm ">
+            <label for="dropdown" className="form-label">
               Type
             </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="type"
-                name="type"
-              />
-            </div>
+            <select
+              type="hidden"
+              className="form-select"
+              id="dropdown"
+              name="type"
+              defaultValue="Select option"
+              onChange={(e) => {
+                setVal(e.target.value);
+              }}
+            >
+              <option value="public">public</option>
+              <option value="private">private</option>
+            </select>
+          </div>
+          <div className="mb-3 form-group-sm">
+            <label for="name" class="form-label">
+              Name
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Enter collection name"
+              name="name"
+            />
           </div>
 
-          <div className="mb-3 row">
-            <label for="required_points" className="col-sm-2 col-form-label">
-              Required Points
+          <div className="mb-3 form-group-sm">
+            <label for="required_points" class="form-label">
+              Required points
             </label>
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className="form-control"
-                id="required_points"
-                name="required_points"
-              />
-            </div>
+            <input
+              type="text"
+              className="form-control"
+              id="required_points"
+              placeholder="Enter required points"
+              name="required_points"
+            />
           </div>
-          <button type="submit" className="btn btn-primary mt-3">
+
+          <button type="submit" className="btn btn-primary btn-sm">
             Submit
           </button>
         </div>

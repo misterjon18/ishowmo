@@ -28,6 +28,7 @@ export default function SeeUnlockedCollection() {
             >
               Add Post to Collection
             </button>
+
             <input
               type="file"
               multiple
@@ -68,7 +69,11 @@ export default function SeeUnlockedCollection() {
                 {collection.collector_id ===
                   Number(localStorage.getItem("collector_id")) && (
                   <button
-                    style={{ marginTop: "10px", marginBottom: "10px" }}
+                    style={{
+                      marginTop: "10px",
+                      marginBottom: "10px",
+                      display: "none",
+                    }}
                     className="btn btn-outline-primary btn-sm"
                   >
                     Delete

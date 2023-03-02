@@ -1,0 +1,11 @@
+.container-add-collection {
+  background-color: bisque;
+  width: 800px;
+  height: auto;
+  margin-top: 50px;
+  padding-right: 250px;
+  padding-left: 250px;
+}
+.form-group-sm {
+  background-color: rgba(10, 143, 231, 0.86);
+}

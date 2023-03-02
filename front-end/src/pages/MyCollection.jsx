@@ -1,3 +1,4 @@
+import { textAlign } from "@mui/system";
 import {
   NavLink,
   Form,
@@ -31,8 +32,8 @@ export const MyCollection = () => {
           {myCollections.collections.map((collection) => {
             return (
               <div key={collection.id} className="col-3">
-                <div className="card" id="card">
-                  <span id="btn-container">
+                <div className="card" id="card" style={{ textAlign: "end" }}>
+                  <span>
                     <button
                       id="btn"
                       className="btn btn-outline-primary btn-sm"
@@ -42,7 +43,9 @@ export const MyCollection = () => {
                     >
                       View
                     </button>
-                    <Form method="delete">
+                  </span>
+                  <Form method="delete">
+                    <span>
                       <button
                         type="submit"
                         id="btn"
@@ -50,13 +53,13 @@ export const MyCollection = () => {
                       >
                         Delete
                       </button>
-                      <input
-                        type="hidden"
-                        name="collection_id"
-                        value={collection.collection_id}
-                      />
-                    </Form>
-                  </span>
+                    </span>
+                    <input
+                      type="hidden"
+                      name="collection_id"
+                      value={collection.collection_id}
+                    />
+                  </Form>
                   <div
                     className="card-body"
                     style={{ textAlign: "center", color: "blue" }}

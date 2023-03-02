@@ -97,7 +97,7 @@ collectionsRouter.post(
   async (req, res) => {
     try {
       const { collector_id } = req.collector;
-
+      console.log(req.body);
       const { name, type, required_points } = req.body;
       const typeLowercase = type.toLowerCase();
       const points = typeLowercase === "public" ? 0 : required_points;
