@@ -6,7 +6,6 @@ export const Layout = () => {
     <div
       style={{
         display: "flex",
-
         height: "100vh",
         oveflow: "auto",
       }}
