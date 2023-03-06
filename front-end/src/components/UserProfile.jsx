@@ -27,7 +27,7 @@ export const UserProfile = () => {
     return <div>loading...</div>;
   }
   return (
-    <div className="container-xl px-4 mt-4" style={{ marginLeft: 400 }}>
+    <div className="container-xl px-4 mt-4" style={{ marginLeft: "150px" }}>
       {/* <ToastContainer
         position="top-right"
         autoClose={2000}

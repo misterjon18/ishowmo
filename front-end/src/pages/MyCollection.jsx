@@ -28,7 +28,7 @@ export const MyCollection = () => {
         >
           Add Collection
         </button>
-        <div className="row">
+        <div className="row" style={{ backgroundColor: "orange" }}>
           {myCollections.collections.map((collection) => {
             return (
               <div key={collection.id} className="col-3">

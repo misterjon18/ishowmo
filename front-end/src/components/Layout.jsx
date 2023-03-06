@@ -14,7 +14,7 @@ export const Layout = () => {
         <Sidebar />
       </div>
 
-      <div style={{ flexGrow: 1 }}>
+      <div style={{ flexGrow: 1, marginLeft: "250px" }}>
         <Outlet></Outlet>
       </div>
     </div>
