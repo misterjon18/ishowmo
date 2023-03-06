@@ -44,6 +44,7 @@ export const MyCollection = () => {
                       View
                     </button>
                   </span>
+
                   <Form method="delete">
                     <span>
                       <button

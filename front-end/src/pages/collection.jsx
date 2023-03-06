@@ -15,11 +15,14 @@ const Collection = () => {
   return (
     <>
       <div className="container mt-2">
-        <div className="row" style={{ textAlign: "center", marginTop: "30px" }}>
+        <div
+          className="row justify-content-center mx-2"
+          style={{ textAlign: "center", marginTop: "30px" }}
+        >
           {collections.map((collection) => {
             return (
-              <div key={collection.id} className="col-3">
-                <div className="card">
+              <div key={collection.id} className="col-3 my-3">
+                <div className="card ">
                   <div className="">
                     <span id="btn-container">
                       <button

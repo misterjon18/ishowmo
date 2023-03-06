@@ -27,7 +27,7 @@ export const UserProfile = () => {
     return <div>loading...</div>;
   }
   return (
-    <div className="container-xl px-4 mt-4" style={{ marginLeft: "150px" }}>
+    <div className="container-xl px-4 mt-4">
       {/* <ToastContainer
         position="top-right"
         autoClose={2000}
@@ -40,7 +40,7 @@ export const UserProfile = () => {
         pauseOnHover
         theme="light"
       /> */}
-      <div className="col-xl-8">
+      <div className="col-xl-8" style={{ margin: "auto" }}>
         {/* <!-- Account details card--> */}
         <div className="card mb-4">
           <div className="card-header">Account Details</div>
