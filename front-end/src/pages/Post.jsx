@@ -25,10 +25,17 @@ export default function Post() {
 
         <div className="row">
           <div className="col-6 my-5" style={{ paddingLeft: "40px" }}>
-            <img
-              src={"/" + post.source}
-              style={{ width: "90%", height: "400px", borderRadius: "10px" }}
-            />
+            {post.type.includes("image") ? (
+              <img
+                src={"/" + post.source}
+                style={{ width: "90%", height: "400px", borderRadius: "10px" }}
+              />
+            ) : post.type.includes("video") ? (
+              <video className="post-item" controls>
+                <source src={"/" + post.source} type={post.type} />
+              </video>
+            ) : null}
+
             <Form
               method={likePost ? "delete" : "post"}
               action={`/posts/${postId}/like`}

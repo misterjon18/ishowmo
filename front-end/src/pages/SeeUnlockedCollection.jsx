@@ -59,12 +59,19 @@ export default function SeeUnlockedCollection() {
           return (
             <div key={post.post_id} className="col-3 See-Unlock">
               <Link to={`/posts/${post.post_id}`}>
-                <img
-                  className="unlock-img"
-                  id="post-image"
-                  src={`http://localhost:8000/${post.source}`}
-                  alt="posts-img"
-                />
+                {post.type.includes("image") ? (
+                  <img
+                    className="unlock-img"
+                    id="post-image"
+                    src={`/${post.source}`}
+                    alt="posts-img"
+                  />
+                ) : post.type.includes("video") ? (
+                  <video className="post-item" controls>
+                    <source src={"/" + post.source} type={post.type} />
+                  </video>
+                ) : null}
+
                 <p className="card-text">{post.type} </p>
                 {collection.collector_id ===
                   Number(localStorage.getItem("collector_id")) && (
