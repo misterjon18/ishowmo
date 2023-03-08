@@ -19,6 +19,7 @@ const Dashboard = () => {
         <div className="row">
           <div className="col-2 offset-10">
             <input
+              accept="image/*,video/*"
               type="file"
               multiple
               ref={fileInput}
@@ -61,11 +62,17 @@ const Dashboard = () => {
                 {/* use Link if your using internal links  */}
                 {/* only use a href for outside links e.g. facebook */}
                 <Link to={`/posts/${post.post_id}`}>
-                  <img
-                    id="collection-image"
-                    src={post.source}
-                    alt="posts-img"
-                  />
+                  {post.type.includes("image") ? (
+                    <img
+                      className="post-item"
+                      src={post.source}
+                      alt="posts-img"
+                    />
+                  ) : post.type.includes("video") ? (
+                    <video className="post-item" controls>
+                      <source src={post.source} type={post.type} />
+                    </video>
+                  ) : null}
                 </Link>
               </div>
             );

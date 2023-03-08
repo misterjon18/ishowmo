@@ -33,40 +33,45 @@ export const MyCollection = () => {
             return (
               <div key={collection.id} className="col-3">
                 <div className="card" id="card" style={{ textAlign: "end" }}>
-                  <span>
-                    <button
-                      id="btn"
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={() => {
-                        navigate(`/collections/${collection.collection_id}`);
-                      }}
-                    >
-                      View
-                    </button>
-                  </span>
-
-                  <Form method="delete">
-                    <span>
-                      <button
-                        type="submit"
-                        id="btn"
-                        className="btn btn-outline-primary btn-sm"
-                      >
-                        Delete
-                      </button>
-                    </span>
-                    <input
-                      type="hidden"
-                      name="collection_id"
-                      value={collection.collection_id}
-                    />
-                  </Form>
                   <div
                     className="card-body"
                     style={{ textAlign: "center", color: "blue" }}
                   >
                     <h5 className="card-title">{collection.name}</h5>
                     <p className="card-text">{collection.type}</p>
+                    <div class="row">
+                      <div class="col-6">
+                        {" "}
+                        <button
+                          id="btn"
+                          className="btn btn-outline-primary btn-sm"
+                          onClick={() => {
+                            navigate(
+                              `/collections/${collection.collection_id}`
+                            );
+                          }}
+                        >
+                          View
+                        </button>
+                      </div>
+                      <div class="col-6">
+                        <Form method="delete">
+                          <button
+                            type="submit"
+                            id="btn"
+                            className="btn btn-outline-primary btn-sm"
+                          >
+                            Delete
+                          </button>
+
+                          <input
+                            type="hidden"
+                            name="collection_id"
+                            value={collection.collection_id}
+                          />
+                        </Form>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
