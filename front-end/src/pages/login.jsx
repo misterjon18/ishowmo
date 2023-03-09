@@ -30,7 +30,7 @@ export const Login = ({ hasError }) => {
                 </span>
               </div>
 
-              <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-4 pt-5 pt-xl-0 mt-xl-n5">
+              <div className="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-4  pt-xl-0 mt-xl-n5">
                 <Form method="post" style={{ width: "23rem" }}>
                   <h3
                     className="fw-normal mb-3 pb-3"

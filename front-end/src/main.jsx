@@ -16,6 +16,8 @@ import {
 import { Login } from "./pages/login";
 import { SignUp } from "./pages/sign-up";
 import AddCollection from "./pages/AddCollection";
+import { ToastContainer, toast } from "react-toastify";
+
 // -------->
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { UserList } from "./components/UserList";
@@ -58,6 +60,16 @@ const router = createBrowserRouter(
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
+              });
+              toast("🦄 Wow so easy!", {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
               });
             } catch (err) {
               console.log(err);

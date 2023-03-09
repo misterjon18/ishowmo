@@ -3,6 +3,7 @@ import { PRIMARY_COLOR } from "../constants";
 import "../styles/Dashboard.css";
 import { useRef } from "react";
 import app from "../../lib/axios-config";
+import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const posts = useLoaderData();
@@ -34,6 +35,7 @@ const Dashboard = () => {
                     "Content-Type": "multipart/form-data",
                   },
                 });
+
                 // location.reload();
                 refreshPage();
               }}
