@@ -61,7 +61,7 @@ const router = createBrowserRouter(
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
               });
-              toast("🦄 Wow so easy!", {
+              toast("🦄 Edit Successful!", {
                 position: "top-right",
                 autoClose: 2000,
                 hideProgressBar: false,
@@ -123,6 +123,29 @@ const router = createBrowserRouter(
           }}
         ></Route>
         <Route
+          path="/post/:postId/comments"
+          action={async ({ request, params }) => {
+            const formData = Object.fromEntries(await request.formData());
+            if (request.method === "PATCH") {
+              try {
+                const editComment = await app.patch(
+                  `/comments/${formData.comment_id}`,
+                  formData,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }
+                );
+                return redirect(`/posts/${params.postId}`);
+              } catch (error) {
+                console.log(error);
+                throw error;
+              }
+            }
+          }}
+        ></Route>
+        <Route
           path="/posts/:postId"
           element={<Post />}
           action={async ({ request, params }) => {
@@ -158,7 +181,23 @@ const router = createBrowserRouter(
               );
               return redirect("/dashboard");
             }
-
+            if (request.method === "PATCH") {
+              try {
+                const editComment = await app.patch(
+                  `/comments/${formData.comment_id}`,
+                  formData,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                  }
+                );
+                return editComment;
+              } catch (error) {
+                console.log(error);
+                throw error;
+              }
+            }
             if (request.method === "POST") {
               try {
                 // needs validation need to check if login is successful

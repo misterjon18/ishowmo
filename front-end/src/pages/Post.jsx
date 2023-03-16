@@ -1,8 +1,9 @@
 import { useLoaderData, Form, useParams } from "react-router-dom";
-import { formatDistanceToNowStrict } from "date-fns";
+
 import { PRIMARY_COLOR } from "../constants";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import "../styles/Post.css";
+import { CommentItem } from "../components/CommentItem";
 
 export default function Post() {
   const [post, comments, likeCount, likePost, getUsername] = useLoaderData();
@@ -71,58 +72,17 @@ export default function Post() {
                         name="comment"
                         rows="3"
                       ></textarea>
-                      <button type="submit" className="btn">
+                      <button
+                        type="submit"
+                        className="btn btn-outline-light mt-1"
+                      >
                         Add Comment
                       </button>
                     </div>
                   </Form>
                   {comments.map((comment) => {
                     return (
-                      <>
-                        <div
-                          key={comment.comment_id}
-                          className="d-flex flex-start mb-4"
-                        >
-                          <img
-                            className="rounded-circle shadow-1-strong me-3"
-                            src="/src/assets/user.png"
-                            alt="avatar"
-                            width="65"
-                            height="65"
-                          />
-                          <div className="card w-100">
-                            <div className="card-body p-4">
-                              <div className="">
-                                <h5>{comment.username}</h5>
-                                <p className="small">
-                                  {formatDistanceToNowStrict(
-                                    new Date(comment.created_at)
-                                  )}
-                                </p>
-                                <p>{comment.comment}</p>
-
-                                <div className="d-flex justify-content-between align-items-center">
-                                  <div className="d-flex align-items-center"></div>
-                                  {localStorage.getItem("collector_id") ==
-                                    comment.collector_id && (
-                                    <Form method="delete">
-                                      <input
-                                        name="comment_id"
-                                        type="hidden"
-                                        value={comment.comment_id}
-                                        readOnly
-                                      />
-                                      <button type="submit" className="btn">
-                                        <i></i>Delete
-                                      </button>
-                                    </Form>
-                                  )}
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </>
+                      <CommentItem key={comment.comment_id} comment={comment} />
                     );
                   })}
                 </div>
